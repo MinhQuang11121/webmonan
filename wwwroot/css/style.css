@@ -1,0 +1,133 @@
+﻿
+.navbar {
+    background-color: #CC0000;
+    justify-content: center;
+    height: auto;
+    box-sizing: border-box;
+    border-bottom: 3px solid #ff4949;
+}
+
+.lg-head img {
+    width: 70px;
+    border-radius: 20px;
+}
+
+.menu-item img {
+    width: 70px;
+    border-radius: 100%;
+}
+
+.menu-item {
+    position: relative;
+    display: inline-flex;
+    line-height: 100px;
+    padding: 0 30px;
+    list-style: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+    .menu-item a {
+        color: aliceblue;
+        text-decoration: none;
+    }
+
+.menu-item-2 {
+    text-decoration: none;
+    list-style: none;
+    cursor: pointer;
+}
+
+.navbar > ul > li > ul {
+    position: absolute;
+    width: 250px;
+    background-color: #CC0000;
+    top: 80px;
+    right: 0;
+    display: none;
+    z-index: 1;
+}
+
+.navbar > ul > li.menu-item:hover ul {
+    display: block;
+}
+/* .carousel-item{   
+    height: 500px;   
+} */
+.danhmuc {
+    margin-top: 50px;
+}
+
+.textdanhmuc {
+    font-weight: 900;
+    color: #CC0000;
+}
+
+.row1 {
+    margin-top: 100px;
+}
+
+.row2, .row3 {
+    margin-top: 100px;
+}
+
+.btn {
+    background-color: #CC0000;
+    border-color: #CC0000;
+    margin-top: 30px;
+}
+
+.card-text {
+    margin-top: 20px;
+}
+
+#box {
+    margin-top: 60px;
+    background-color: #CC0000;
+    max-width: 100%;
+    text-align: center;
+    color: aliceblue;
+    height: 300px;
+    padding: 30px;
+}
+
+.btnmuangay {
+    margin-top: 40px;
+    padding: 25px 60px;
+    background-color: #CC0000;
+    font-weight: 900;
+    border-color: black;
+    color: aliceblue;
+    transition: all 1s;
+}
+
+    .btnmuangay:hover {
+        color: black;
+        background-color: aliceblue;
+    }
+
+.gt-kinang {
+    margin-top: 100px;
+}
+
+.gt-kinang1 {
+    text-align: center;
+}
+
+.gt-kinang2 {
+    margin-top: 80px;
+}
+
+    .gt-kinang2 h4 {
+        text-align: center;
+    }
+
+    .gt-kinang2 p {
+        text-align: center;
+    }
+
+footer {
+    margin-top: 50px;
+    background-color: #CC0000;
+}

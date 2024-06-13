@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "_HeaderPartial";
+}
+
+<header>
+    <div class="navbar">
+        <div class="lg-head">
+            <img src="~/images/logo.webp">
+        </div>
+        <ul>
+            <li class="menu-item"><a href="">Trang chủ</a></li>
+            <li class="menu-item">
+                <a href="">Danh mục món ăn</a>
+                <ul>
+                    <li class="menu-item-2"><a href="">Trà sữa</a></li>
+                    <li class="menu-item-2"><a href="">Ăn vặt</a></li>
+                    <li class="menu-item-2"><a href="">Kem</a></li>
+                </ul>
+            </li>
+          @Html.Partial("_TimKiem")
+            <li class="menu-item">
+                <a href=""><img src="~/images/lg-face.webp"></a>
+                <ul>
+                    <li class="menu-item-2"><a href="">Thông tin tài khoản</a></li>
+                    <li class="menu-item-2"><a href="">Giỏ hàng</a></li>
+                    <li class="menu-item-2"><a href="">Thanh toán</a></li>
+                    <li class="menu-item-2"><a href="">Cài đặt</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</header>
+
