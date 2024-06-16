@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<MonAnModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -8,143 +9,36 @@
         <div class="row">
             <div class="col">
                 <div class="textdanhmuc">
-                    <h1>DANH MỤC MÓN ĂN</h1>
+                    <h1>MÓN ĂN NỔI BẬT</h1>
                 </div>
+                <div class="center">
+                    <a href="#" class="btn btn-primary">
+                        Xem tất cả
+                    </a>
+               </div>2
             </div>
         </div>
         <div class="danhsach">
             <div class="row1">
                 <div class="row">
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://i.pinimg.com/originals/50/d7/c7/50d7c73307bd04dd93bd50e0f001a266.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Trà sữa Socola</h4>
-                                <h5 class="card-text">25.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
+                    @foreach ( var item in Model)
+                    {
+                        <div class="col">
+                            <div class="card" style="width: 18rem;">
+                                <img src="https://i.pinimg.com/originals/50/d7/c7/50d7c73307bd04dd93bd50e0f001a266.jpg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h4 class="card-title">@item.TenMonAn</h4>
+                                    <h5 class="card-text">@item.DonGia đ</h5>
+                                    <a href="#" class="btn btn-primary">Mua ngay</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6i7O9qjTxx-UFzJLfLo-wzBVHzyssO5tr9X44XnAPVm0kRam3NKKiwycHZpmz8dufJZ0&usqp=CAU" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Trà sữa nguyên chất</h4>
-                                <h5 class="card-text">20.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://hopdungthucan.com/wp-content/uploads/2022/05/hinh-anh-ly-tra-sua-tran-chau-den_062227981.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Trà sữa trái cây</h4>
-                                <h5 class="card-text">30.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://product.hstatic.net/200000598817/product/cach-lam-tra-sua-thai-xanh-1_6db0e56ff4e54cad8ef22cf82b09954f.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Trà sữa thái xanh</h4>
-                                <h5 class="card-text">40.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
+                    }
+
+                   
                 </div>
             </div>
-            <div class="row2">
-                <div class="row">
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://cdn.vietnammoi.vn/2019/7/31/photo-2-1564579594598655086576.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Kim chi</h4>
-                                <h5 class="card-text">15.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://cavienchien.com.vn/upload/hinhanh/bang-gia-ca-vien-chien-gia-si783n.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Cá viên chiên</h4>
-                                <h5 class="card-text">20.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://sieuthitana.vn/mediacenter/media/2864/images/rs(1).jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Bánh tráng trộn</h4>
-                                <h5 class="card-text">10.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://dulichvietnam.com.vn/vnt_upload/File/Image/top_7_quan_an_vat_ngon_bo_re_quan_cau_giay_thu_hut_gioi_tre_ha_noi_anh13.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Combo chiên</h4>
-                                <h5 class="card-text">80.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row3">
-                <div class="row">
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://bizweb.dktcdn.net/thumb/grande/100/093/924/products/walls-kem-oc-que-socola-hanh-nhan-cornerro-royale-choco-luv-1.png?v=1712548678880" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Kem Socola</h4>
-                                <h5 class="card-text">7.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://1.bp.blogspot.com/-QCtJjm_Ai0I/XcFvlPBkLPI/AAAAAAAATq4/_iWT_zwdaZU_hq3UwoWjbL6t7TS4jRddgCLcBGAsYHQ/s640/Cac-loai-kem-ban-tot-nhat.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Kem dâu</h4>
-                                <h5 class="card-text">7.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://pos.nvncdn.com/f52c3c-9106/ps/20170901_DKs7m6F62gMmKho5NI4jp4N7.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Kem ly trái cây</h4>
-                                <h5 class="card-text">15.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://hinh365.com/wp-content/uploads/2020/06/218-881-tam-anh-ve-kem-oc-que-kem-ly-dep-ngat-ngay-hinh-anh-chat-luong-cao-tren-123rf-com-20.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Kem kí</h4>
-                                <h5 class="card-text">20.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
         </div>
     </div>
 

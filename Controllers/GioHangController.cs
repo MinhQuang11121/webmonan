@@ -4,7 +4,7 @@ namespace WebDatMonAn.Controllers
 {
     public class GioHangController : Controller
     {
-        public IActionResult Index()
+        public IActionResult GioHang()
         {
             return View();
         }
