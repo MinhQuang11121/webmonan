@@ -2,12 +2,17 @@ using Microsoft.EntityFrameworkCore;
 using WebDatMonAn.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataContext>(options => {
     options.UseSqlServer(builder.Configuration["ConnectionStrings:ConnectDB"]);
 });
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(30);
+    options.Cookie.IsEssential = true;
+});
 var app = builder.Build();
 
 
@@ -21,7 +26,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();

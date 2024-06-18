@@ -1,208 +1,72 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<DanhMucModel>
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Danh Sách danh mục</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a asp-action="Index"  asp-controller="QuanTri">Trang quản trị</a></li>
+            <li class="breadcrumb-item active">Tables</li>
+        </ol>
+       
+        <div class="card mb-4">
+           
+            <div class="card-body">
+                <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+                    <div class="card">
+                        <h3><a asp-action="Create" asp-controller="DanhMuc" class="btn btn-primary">Thêm mới danh mục</a></h3>
+                    </div>
+                  
+                    <div class="datatable-container">
+                        <table id="myTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th data-sortable="true" >
+                                        #
+                                    <th data-sortable="true">
+                                         Tên Danh mục
+                                        </th>
+                                        <th data-sortable="true" >
+                                          Slug Danh mục
+                                            <th data-sortable="true" >Mô tả</th>
+                                            <th data-sortable="true" >Trạng Thái</th>
+                                            <th data-sortable="true">Manager</th>
+                                            
+                                        </tr>
+                                        </thead>
+                                            <tbody>
+                                @foreach(var item in Model)
+                                {
+                                    <tr data-index="0">
+                                        <td>@item.MaDanhMuc</td>
+                                        <td>@item.TenDanhMuc</td>
+                                        <td>@item.SlugDanhMuc</td>
+                                        <td>@item.MoTa</td>
 
-<div class="container">
-    @Html.Partial("_SiderPartial")
-    <div class="danhmuc text-center">
-        <div class="row">
-            <div class="col">
-                <div class="textdanhmuc">
-                    <h1>DANH MỤC MÓN ĂN</h1>
-                </div>
-            </div>
-        </div>
-        <div class="danhsach">
-            <div class="row1">
-                <div class="row">
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://i.pinimg.com/originals/50/d7/c7/50d7c73307bd04dd93bd50e0f001a266.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Trà sữa Socola</h4>
-                                <h5 class="card-text">25.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6i7O9qjTxx-UFzJLfLo-wzBVHzyssO5tr9X44XnAPVm0kRam3NKKiwycHZpmz8dufJZ0&usqp=CAU" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Trà sữa nguyên chất</h4>
-                                <h5 class="card-text">20.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://hopdungthucan.com/wp-content/uploads/2022/05/hinh-anh-ly-tra-sua-tran-chau-den_062227981.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Trà sữa trái cây</h4>
-                                <h5 class="card-text">30.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://product.hstatic.net/200000598817/product/cach-lam-tra-sua-thai-xanh-1_6db0e56ff4e54cad8ef22cf82b09954f.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Trà sữa thái xanh</h4>
-                                <h5 class="card-text">40.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row2">
-                <div class="row">
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://cdn.vietnammoi.vn/2019/7/31/photo-2-1564579594598655086576.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Kim chi</h4>
-                                <h5 class="card-text">15.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://cavienchien.com.vn/upload/hinhanh/bang-gia-ca-vien-chien-gia-si783n.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Cá viên chiên</h4>
-                                <h5 class="card-text">20.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://sieuthitana.vn/mediacenter/media/2864/images/rs(1).jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Bánh tráng trộn</h4>
-                                <h5 class="card-text">10.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://dulichvietnam.com.vn/vnt_upload/File/Image/top_7_quan_an_vat_ngon_bo_re_quan_cau_giay_thu_hut_gioi_tre_ha_noi_anh13.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Combo chiên</h4>
-                                <h5 class="card-text">80.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row3">
-                <div class="row">
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://bizweb.dktcdn.net/thumb/grande/100/093/924/products/walls-kem-oc-que-socola-hanh-nhan-cornerro-royale-choco-luv-1.png?v=1712548678880" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Kem Socola</h4>
-                                <h5 class="card-text">7.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://1.bp.blogspot.com/-QCtJjm_Ai0I/XcFvlPBkLPI/AAAAAAAATq4/_iWT_zwdaZU_hq3UwoWjbL6t7TS4jRddgCLcBGAsYHQ/s640/Cac-loai-kem-ban-tot-nhat.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Kem dâu</h4>
-                                <h5 class="card-text">7.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://pos.nvncdn.com/f52c3c-9106/ps/20170901_DKs7m6F62gMmKho5NI4jp4N7.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Kem ly trái cây</h4>
-                                <h5 class="card-text">15.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://hinh365.com/wp-content/uploads/2020/06/218-881-tam-anh-ve-kem-oc-que-kem-ly-dep-ngat-ngay-hinh-anh-chat-luong-cao-tren-123rf-com-20.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h4 class="card-title">Kem kí</h4>
-                                <h5 class="card-text">20.000đ</h5>
-                                <a href="#" class="btn btn-primary">Mua ngay</a>
-                            </div>
-                        </div>
-                    </div>
+                                        @if (item.TrangThai ==1 )
+                                        {
+                                            <td>
+                                                <button class="btn btn-primary">Hiển thị</button>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center align-middile">
+                                                <button class="btn btn-warning"> Không Hiển thị</button>
+                                            </td>
+                                        }
+                                       
+                                        <td>
+                                            <button class="btn btn-warning ">Edit</button>
+                                            <button class="btn btn-danger">Delete</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                                                    </table>
+                                                    </div>
+                  
                 </div>
             </div>
         </div>
     </div>
-
-</div>
-<div id="box">
-    <div class="noidungcall">
-        <h3>FOOD ANH TAI</h3>
-        <h1>FOOD OF THE DAY</h1>
-        <h3>Call and Order : 0763058366</h3>
-    </div>
-    <input class="btnmuangay" type="button" value="Mua ngay !">
-</div>
-<div class="container">
-    <div class="gt-kinang">
-        <div class="gt-kinang1">
-            <p>Điều gì tạo nên sự khác biệt</p>
-            <h1>Tại Food Anh Tai</h1>
-        </div>
-        <div class="gt-kinang2">
-            <div class="row">
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://png.pngtree.com/png-vector/20240326/ourlarge/pngtree-cartoon-food-dishes-and-objects-group-coloring-page-png-image_12209062.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h4 class="card-title">Chất lượng hoàn hảo</h4>
-                            <p class="card-text">Thiết bị và nguyên liệu của Đà Nẵng</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://png.pngtree.com/png-vector/20230531/ourlarge/pngtree-kitchen-cooking-coloring-page-vector-png-image_6788986.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h4 class="card-title">Quy trình cực nhanh</h4>
-                            <p class="card-text">Thời gian nhanh chóng cho khách hàng không chờ đợi</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://png.pngtree.com/png-vector/20230531/ourlarge/pngtree-cute-boy-in-a-chef-hat-and-apron-coloring-page-vector-png-image_6782921.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h4 class="card-title">Kĩ thuật hoàn hảo</h4>
-                            <p class="card-text">Đội ngũ nhân viên được đào tạo kĩ càng</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://tomautructuyen.vn/wp-content/uploads/2023/09/Tranh-to-mau-do-an-anime-Do-an-kieu-Han.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h4 class="card-title">Hương vị tuyệt vời</h4>
-                            <p class="card-text">Hương vị chuẩn Đà Nẵng đầy ấn tượng</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+</main>
+<

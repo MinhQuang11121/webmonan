@@ -17,10 +17,10 @@ namespace WebDatMonAn.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.21")
+                .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("WebDatMonAn.Models.CTHDModel", b =>
                 {
@@ -28,7 +28,7 @@ namespace WebDatMonAn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaCT"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaCT"));
 
                     b.Property<int>("MaHD")
                         .HasColumnType("int");
@@ -57,7 +57,7 @@ namespace WebDatMonAn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaDG"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaDG"));
 
                     b.Property<int>("MaMonAn")
                         .HasColumnType("int");
@@ -86,7 +86,7 @@ namespace WebDatMonAn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaDanhMuc"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaDanhMuc"));
 
                     b.Property<string>("MoTa")
                         .IsRequired()
@@ -114,7 +114,7 @@ namespace WebDatMonAn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaHD"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaHD"));
 
                     b.Property<string>("CachThanhtoan")
                         .IsRequired()
@@ -162,7 +162,11 @@ namespace WebDatMonAn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaMonAn"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaMonAn"));
+
+                    b.Property<string>("DiaChi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("DonGia")
                         .HasColumnType("float");
@@ -206,13 +210,91 @@ namespace WebDatMonAn.Migrations
                     b.ToTable("MonAns");
                 });
 
+            modelBuilder.Entity("WebDatMonAn.Models.NhaCungCapModel", b =>
+                {
+                    b.Property<int>("MaNCC")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaNCC"));
+
+                    b.Property<string>("DiaChi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SoDienThoai")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TenNCC")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MaNCC");
+
+                    b.ToTable("NhaCungCaps");
+                });
+
+            modelBuilder.Entity("WebDatMonAn.Models.PhanQuyenModel", b =>
+                {
+                    b.Property<int>("MaPQ")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaPQ"));
+
+                    b.Property<string>("MoTa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TenQuyen")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MaPQ");
+
+                    b.ToTable("PhanQuyens");
+                });
+
+            modelBuilder.Entity("WebDatMonAn.Models.ShipperModel", b =>
+                {
+                    b.Property<int>("MaShip")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaShip"));
+
+                    b.Property<string>("CongTy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("NgayLayDon")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SoDienThoai")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ten")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MaShip");
+
+                    b.ToTable("Shippers");
+                });
+
             modelBuilder.Entity("WebDatMonAn.Models.TaiKhoanModel", b =>
                 {
                     b.Property<int>("MaTK")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaTK"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaTK"));
 
                     b.Property<string>("DiaChi")
                         .IsRequired()
@@ -229,6 +311,9 @@ namespace WebDatMonAn.Migrations
                     b.Property<string>("Hinh")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MaPQ")
+                        .HasColumnType("int");
 
                     b.Property<int>("MaVT")
                         .HasColumnType("int");
@@ -252,6 +337,8 @@ namespace WebDatMonAn.Migrations
 
                     b.HasKey("MaTK");
 
+                    b.HasIndex("MaPQ");
+
                     b.HasIndex("MaVT");
 
                     b.ToTable("TaiKhoans");
@@ -263,7 +350,7 @@ namespace WebDatMonAn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaTrangThai"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaTrangThai"));
 
                     b.Property<string>("MoTa")
                         .IsRequired()
@@ -284,7 +371,7 @@ namespace WebDatMonAn.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaVT"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaVT"));
 
                     b.Property<string>("MoTa")
                         .IsRequired()
@@ -361,11 +448,19 @@ namespace WebDatMonAn.Migrations
 
             modelBuilder.Entity("WebDatMonAn.Models.TaiKhoanModel", b =>
                 {
+                    b.HasOne("WebDatMonAn.Models.PhanQuyenModel", "PhanQuyen")
+                        .WithMany()
+                        .HasForeignKey("MaPQ")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WebDatMonAn.Models.ViTriModel", "ViTri")
                         .WithMany()
                         .HasForeignKey("MaVT")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("PhanQuyen");
 
                     b.Navigation("ViTri");
                 });
