@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col">
                 <div class="textdanhmuc">
-                    <h1>MÓN ĂN NỔI BẬT</h1>
+                    <h1> CÓ @Model.Count() MÓN ĂN</h1>
                 </div>
                 <div class="center">
                     <a href="#" class="btn btn-primary">
@@ -21,21 +21,8 @@
         <div class="danhsach">
             <div class="row1">
                 <div class="row">
-                    @foreach (var item in Model)
-                    {
-                        <div class="col">
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://i.pinimg.com/originals/50/d7/c7/50d7c73307bd04dd93bd50e0f001a266.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h4 class="card-title">@item.TenMonAn</h4>
-                                    <h5 class="card-text">@item.DonGia đ</h5>
-                                    <a href="#" class="btn btn-primary">Mua ngay</a>
-                                </div>
-                            </div>
-                        </div>
-                    }
 
-
+                    @Html.Partial("_DSMonAn")
                 </div>
             </div>
 

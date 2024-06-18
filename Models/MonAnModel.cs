@@ -16,6 +16,7 @@ namespace WebDatMonAn.Models
         public string MoTa { get; set; }
         public int TrangThai { get; set; }
         public int SoLuong { get; set; }
+        
 
         [Required(ErrorMessage = "Yêu cầu nhập giá món ăn")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Giá món ăn phải lớn hơn 0")]
@@ -30,5 +31,5 @@ namespace WebDatMonAn.Models
 
         [ForeignKey("MaDanhMuc")]
         public DanhMucModel DanhMuc { get; set; }
-    }
+}
 }

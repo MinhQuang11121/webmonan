@@ -17,5 +17,8 @@ namespace WebDatMonAn.Repository
         public DbSet<ViTriModel> ViTris { get; set; }
         public DbSet<HoaDonModel> HoaDons { get; set; }
         public DbSet<CTHDModel> CTHDs { get; set; }
+        public DbSet<NhaCungCapModel> NhaCungCaps { get; set; }
+        public DbSet<ShipperModel> Shippers { get; set; }
+        public DbSet<PhanQuyenModel> PhanQuyens{ get; set; }
     }
 }

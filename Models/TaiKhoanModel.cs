@@ -19,5 +19,8 @@ namespace WebDatMonAn.Models
         public int MaVT { get; set; }
         [ForeignKey("MaVT")]
         public ViTriModel ViTri { get; set; }
+        public int MaPQ { get; set; }
+        [ForeignKey("MaPQ")]
+        public PhanQuyenModel PhanQuyen { get; set; }
     }
 }

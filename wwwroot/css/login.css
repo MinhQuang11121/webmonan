@@ -1,0 +1,112 @@
+
+.navbar{
+    background-color: rgb(200, 207, 207);
+    height: 60px;
+    border-top: 5px solid #CC0000;
+    justify-content: center;
+}
+.lg{
+    line-height: 40px;
+    font-size: 20px;
+    font-weight: 700;
+    font-family:Georgia;
+    color: #CC0000;
+}
+.container{  
+    display: flex;
+    justify-content: center;
+    margin-top:40px ;
+}
+.formlogin{
+   background-color: #c9c9c962;
+    margin-top: 20px;
+    border: 2px solid black;
+    padding: 15px 70px;
+    border-radius: 10px;
+}
+.welcome{
+    text-align: center;
+    color: #CC0000;
+}
+.gt-login{
+    text-align: center;
+    color: #CC0000;
+}
+.dn-dk{
+    margin-top: 30px;
+    color: #CC0000;
+    font-weight: 500;
+}
+.dn{
+    display: flex;
+}
+.dk {
+    margin-top: 20px;
+    display: flex;
+}
+.dn-dk input{
+    width: 230px;
+    margin-left: 40px;
+    height: 30px;
+}
+.save-forget{
+    margin-top: 20px;
+    display: flex;  
+    margin-left: 30px;
+}
+.save-forget input{
+    width:20px;
+    
+}
+.save-forget p {
+    margin-left: 70px;
+}
+.save-forget p>a{
+    text-decoration: none;
+    color: red;
+    font-style: italic;
+}
+.save-forget p>a:hover{
+    color: rgb(60, 60, 255);
+}
+.btn-dn{
+    text-align: center;
+    margin: 25px;
+}
+.btn-dn input{
+    padding: 18px 40px;   
+    border-radius: 10px;
+    border: 0;
+    background-color: rgb(255, 56, 86);
+    letter-spacing: 1.5px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-shadow: rgb(201, 46, 70) 0px 10px 0px 0px;
+    color: hsl(0, 0%, 100%);
+    cursor: pointer;
+}
+.btn-dn input:hover{
+    box-shadow: rgb(201, 46, 70) 0px 7px 0px 0px;
+}
+.btn-dn input:active {
+    background-color: rgb(255, 56, 86);
+    box-shadow: rgb(201, 46, 70) 0px 0px 0px 0px;
+    transform: translateY(5px);
+    transition: 200ms;
+}
+.dn-other{
+    text-align: center;
+    margin-top: 40px;
+}
+.no-dk{
+    margin-top: 40px;
+    display: flex;
+}
+.no-dk p>a{
+    margin-left: 20px;
+}
+.fa-facebook{
+    font-size: 45px;
+}
+
+

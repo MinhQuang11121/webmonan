@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebDatMonAn.Models;
 using WebDatMonAn.Repository;
 
 namespace WebDatMonAn.Area.Admin.Controllers
 {
+    [Area("Admin")]
     public class DanhMucController : Controller
     {
         private readonly DataContext _dataContext;
@@ -11,13 +13,28 @@ namespace WebDatMonAn.Area.Admin.Controllers
         {
             _dataContext = dataContext;
         }
-        public async Task<IActionResult> Index(string Slug="")
+        [HttpGet]
+        public IActionResult Index()
         {
-            var danhmuc = _dataContext.DanhMucs.Where(c => c.SlugDanhMuc == Slug).FirstOrDefault();
-            if (danhmuc == null) return RedirectToAction("Index");
-            var monantheodanhmuc = _dataContext.MonAns.Where(p => p.MaDanhMuc == danhmuc.MaDanhMuc);
-
-            return View( await monantheodanhmuc.OrderByDescending(p=>p.MaDanhMuc).ToListAsync());
+            var danhmuc = _dataContext.DanhMucs.OrderByDescending(c => c.MaDanhMuc).ToList();
+            return View(danhmuc);
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(DanhMucModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            return View("Create");
+        } 
+
+        
     }
-}
+
+    }
