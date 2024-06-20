@@ -21,7 +21,7 @@ namespace WebDatMonAn.Controllers
 
         {
           
-            var monan = _dataContext.MonAns.Include(c => c.DanhMuc).AsNoTracking().OrderBy(x => x.NgayTao).ToList();
+            var monan = _dataContext.MonAns.Include(c => c.DanhMuc).AsNoTracking().Where(d=>d.TrangThai==1).OrderBy(x => x.NgayTao).Take(8).ToList();
             return View(monan);
         }
         public IActionResult TimKiem(string? query)
@@ -42,6 +42,50 @@ namespace WebDatMonAn.Controllers
             var monan =   _dataContext.MonAns.Include(x => x.DanhMuc).Where(p => p.MaMonAn == Id).FirstOrDefault();
 
             return View(monan);
+        }
+        public IActionResult Tatcamonan()
+        {
+            var monan = _dataContext.MonAns.Include(c => c.DanhMuc).AsNoTracking().OrderBy(x => x.NgayTao).Where(d => d.TrangThai == 1).ToList();
+            return View(monan);
+
+           
+        }
+        public async Task<IActionResult> Giacao()
+        {
+            var monAns = await _dataContext.MonAns
+                                            .Where(c => c.TrangThai == 1)
+                                           .OrderBy(m => m.DonGia) 
+                                           .ToListAsync();
+            return View("Tatcamonan", monAns);
+        }
+        public async Task<IActionResult> Giathap()
+        {
+            var monAns = await _dataContext.MonAns
+                                            .Where(c=>c.TrangThai ==1).
+                                             OrderByDescending(m => m.DonGia)
+                                           .ToListAsync();
+            return View("Tatcamonan", monAns);
+        }
+        public async Task<IActionResult> Gia50K()
+        {
+            var monAns = await _dataContext.MonAns
+                                       .Where(m => m.DonGia <= 50000)
+                                       .ToListAsync();
+            return View("Tatcamonan", monAns);
+        }
+        public async Task<IActionResult> Gia50KDen100k()
+        {
+            var monAns = await _dataContext.MonAns
+                                       .Where(m => m.DonGia <= 100000 && m.DonGia >=50000)
+                                       .ToListAsync();
+            return View("Tatcamonan", monAns);
+        }
+        public async Task<IActionResult> Tren100K()
+        {
+            var monAns = await _dataContext.MonAns
+                                       .Where(m => m.DonGia >= 100000)
+                                       .ToListAsync();
+            return View("Tatcamonan", monAns);
         }
         public IActionResult Privacy()
         {

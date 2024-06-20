@@ -1,6 +1,4 @@
-﻿﻿.container {
-    margin-top: 100px;
-}
+﻿
 
 .tieude {
     /* margin-left: px; */
@@ -190,4 +188,59 @@ ul > li.list-img > img:hover {
 
 .ngdanhgia {
     margin-left: 20px;
+}
+
+.giamgia {
+    margin-top: 30px;
+}
+
+.form-giamgia tr td {
+    border-bottom: 1px solid;
+}
+
+.anhgiamgia {
+    width: 100px;
+}
+
+.form-giamgia {
+    margin-top: 30px;
+}
+
+table tr td {
+    padding: 0 30px;
+}
+
+.tenmongiam {
+    color: #CC0000;
+    font-weight: 700;
+}
+
+.btn-giamgia {
+    margin-left: 5px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: #CC0000;
+    border-color: #CC0000;
+    transition: all 0.3s;
+}
+
+    .btn-giamgia:hover {
+        padding: 7px 15px;
+    }
+
+.gia {
+    margin-bottom: 20px;
+}
+
+.matgia {
+    text-decoration: line-through;
+}
+
+.matgia {
+    line-height: 1px;
+}
+
+.giagiam {
+    color: #CC0000;
+    font-weight: 900;
 }

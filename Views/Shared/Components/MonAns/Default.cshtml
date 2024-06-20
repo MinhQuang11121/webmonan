@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MonAnModel>
+
+    <div class="giamgia">
+        <h5>Món đang giảm</h5>
+        <div class="form-giamgia">
+            <table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img class="anhgiamgia" src="~/image/monan/@item.HinhAnh">
+                    </td>
+                    <td>
+                        <h6 class="tenmongiam">Combo @item.MaMonAn :@item.TenMonAn</h6>
+                        <p>@item.DiaChiQuan</p>
+                    </td>
+                    <td class="gia">
+                        <!-- <p class="matgia">30.000đ</p> -->
+                        <h6 class="giagiam"> @item.DonGia  đ</h6>
+                    </td>
+                    <td>
+                       
+                            <button class="btn-giamgia" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i class="fa-sharp fa-solid fa-plus"></i>
+                            </button>
+
+                    </td>
+                </tr>
+                }
+            </table>
+       
+
+        <!-- Modal -->
+        
+    </div>

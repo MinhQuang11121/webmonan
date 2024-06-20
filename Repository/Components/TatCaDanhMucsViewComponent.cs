@@ -3,16 +3,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebDatMonAn.Repository.Components
 {
-    public class DanhMucsViewComponent:ViewComponent
+    public class TatCaDanhMucsViewComponent:ViewComponent
     {
         private readonly DataContext _dataContext;
-        public DanhMucsViewComponent(DataContext dataContext)
+        public TatCaDanhMucsViewComponent(DataContext dataContext)
         {
             _dataContext = dataContext;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var danhMucs = await _dataContext.DanhMucs.Take(3).ToListAsync();
+            var danhMucs = await _dataContext.DanhMucs.Where(d=>d.TrangThai==1).ToListAsync();
             return View(danhMucs);
         }
     }

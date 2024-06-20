@@ -2,11 +2,13 @@
 
 namespace WebDatMonAn.Models
 {
-    public class TrangThaiModel
+    public class ChucNangModel
     {
         [Key]
-        public int MaTrangThai { get; set; }
-        public string TenTrangThai { get; set; }
+        public int MaCN { get; set; }
+
+        public string TenQuyen { get; set; }
+
         public string MoTa { get; set; }
     }
 }

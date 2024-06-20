@@ -7,12 +7,13 @@ namespace WebDatMonAn.Models
         [Key]
         public int MaShip { get; set; }
 
-        public string Ten { get; set; }
+        public string TenDN { get; set; }
 
         public string SoDienThoai { get; set; }
 
-        public string CongTy { get; set; }
+        public string MatKhau { get; set; }
+        public string Email { get; set; }
 
-        public DateTime NgayLayDon { get; set; }
+
     }
 }

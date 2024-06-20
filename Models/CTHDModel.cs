@@ -14,6 +14,7 @@ namespace WebDatMonAn.Models
         [ForeignKey("MaMonAn")]
         public MonAnModel MonAn { get; set; }
         public int soluongban { get; set; }
+        public float dongiaban { get; set; }
         public double tongtien { get; set; }
     }
 }

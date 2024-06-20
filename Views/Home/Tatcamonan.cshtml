@@ -1,0 +1,234 @@
+﻿<style>
+    .col-3 {
+        margin-top: 70px;
+    }
+
+    .tieude-danhmuc > h5 {
+        color: #CC0000;
+        font-weight: 700;
+    }
+
+    .sanpham {
+        background-color: #cc0000;
+        border-radius: 10px;
+    }
+
+    .list-sanpham {
+        margin-top: 20px;
+        padding-left: 5px;
+    }
+
+    .list-menu {
+        list-style: none;
+        cursor: pointer;
+    }
+
+        .list-menu:hover {
+            background-color: #dd2b2b;
+        }
+
+        .list-menu > a {
+            color: white;
+            text-decoration: none;
+            line-height: 50px;
+            font-size: 18px;
+        }
+
+    .list-sanpham > ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .gia {
+        margin-top: 20px;
+    }
+
+        .gia > div > h5 {
+            color: #CC0000;
+            font-weight: 700;
+        }
+
+    .mucgia {
+        background-color: #cc0000;
+        border-radius: 10px;
+        padding: 5px 0;
+    }
+
+    .list-gia {
+        list-style: none;
+        color: #cc0000;
+        margin-top: 20px;
+    }
+
+        .list-gia > a {
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            outline: none;
+            cursor: pointer;
+            width: 150px;
+            height: 25px;
+            background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+            border-radius: 30px;
+            border: 1px solid #8F9092;
+            transition: all 0.2s ease;
+            font-family: "Source Sans Pro", sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #606060;
+            text-shadow: 0 1px #fff;
+        }
+
+            .list-gia > a:hover {
+                box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1;
+            }
+
+            .list-gia > a:active {
+                box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+            }
+
+            .list-gia > a:focus {
+                box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 5px 3px #999, inset 0 0 30px #aaa;
+            }
+
+    .anhthe {
+        padding: 5px 0;
+        width: 200px;
+    }
+
+    .muclucgia > ul > li {
+        float: left;
+        list-style: none;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+        .muclucgia > ul > li > a {
+            color: black;
+            text-decoration: none;
+        }
+
+    .btn-gia-mua > ul {
+        display: flex;
+        list-style: none;
+        margin-top: 15px;
+        float: left;
+        text-align: center;
+    }
+
+    .btn-giohang {
+        margin-left: 20px;
+    }
+
+        .btn-giohang > button {
+            padding: 5px;
+            border: #CC0000;
+            border-radius: 50px;
+            background-color: #CC0000;
+        }
+
+    .btn-gia-mua > ul > li > .btn {
+        background-color: #CC0000;
+        border-color: #CC0000;
+    }
+
+    .btn-giohang > button > i {
+        color: #FCFCFC;
+    }
+
+    .card {
+        cursor: pointer;
+    }
+
+    .muclucgia {
+        margin-top: 0;
+    }
+
+    .giacaothap {
+        background-color: #CC0000;
+        height: 50px;
+        border-right: 1px solid;
+        border-radius: 5px;
+    }
+
+    .muclucgia > ul > li > a {
+        color: white;
+        font-weight: bolder;
+        line-height: 50px;
+    }
+
+    .muclucgia > ul > li:hover {
+        background-color: rgb(243, 73, 73);
+    }
+
+    .col-9 {
+        margin-top: 50px;
+    }
+
+    .row {
+        margin-top: 90px;
+    }
+
+</style>
+<div class="container">
+    @Html.Partial("_SiderPartial")
+    </div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-3">
+            <div class="tieude-danhmuc">
+                <h5>Tất cả danh mục</h5>
+            </div>
+            <div class="sanpham">
+                <div class="list-sanpham">
+                    <ul>
+                       
+                       <vc:tat-ca-danh-mucs></vc:tat-ca-danh-mucs>
+                    </ul>
+                </div>
+            </div>
+            <div class="gia">
+                <div>
+                    <h5>Giá</h5>
+                </div>
+                <div class="mucgia">
+                    <ul>
+                    
+                        <li   class="list-gia">
+                            <a asp-action="Gia50K" asp-controller="Home" style="text-decoration:none;color:red;" >Dưới 50.000Đ</a>
+                        </li>
+                        <li class="list-gia">
+                        </li>
+                        <li class="list-gia">
+                            <a asp-action="Gia50KDen100k" asp-controller="Home" style="text-decoration:none;color:red;">50.000Đ - 100.000Đ</a>
+                        </li>
+                        <li class="list-gia">
+                            <a asp-action="Tren100k" asp-controller="Home" style="text-decoration:none;color:red;">Trên 100.000Đ</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="muclucgia">
+                <ul>
+                    <li class="giacaothap"><a asp-action="Tatcamonan" asp-controller="Home">MÓN ĂN MỚI</a></li>
+                    <li class="giacaothap"><a asp-action="Giathap" asp-controller="Home" > GIÁ THẤP ĐẾN CAO</a></li>
+                    <li class="giacaothap"><a asp-action="Giacao" asp-controller="Home" >GIÁ CAO ĐẾN THẤP</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="container text-center">
+
+                    <div class="row">
+                       @Html.Partial("_DSMonAn")
+                        
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

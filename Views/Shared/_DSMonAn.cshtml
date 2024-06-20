@@ -1,14 +1,15 @@
-﻿@foreach (var item in Model)
+﻿@model IEnumerable<MonAnModel>
+@foreach (var item in Model)
 {
-    <div class="col">
+    <div class="col m-1">
         <div class="card" style="width: 18rem;;">
             <a asp-action="Detail" asp-controller="Home" asp-route-Id="@item.MaMonAn" style="text-decoration:none;color:black;">
                 <img src="~/image/monan/@item.HinhAnh" class="card-img-top" alt="..." style="height:300px;">
             </a>
             <div class="card-body">
                 <a asp-action="Detail" asp-controller="Home" asp-route-Id="@item.MaMonAn" style="text-decoration:none;color:black;">
-                    <h4 class="card-title">@(item.TenMonAn.Length > 16 ? item.TenMonAn.Substring(0, 16) : item.TenMonAn)</h4>
-                    <h5 class="card-text">@item.DonGia đ</h5>
+                    <h4 class="card-title">@(item.TenMonAn.Length > 16 ? item.TenMonAn.Substring(0, 16) : item.TenMonAn)...</h4>
+                    <h5 class="card-text">@item.DonGia.ToString("#,###0") đ</h5>
                 </a>
                 <a asp-action="ThemCart" asp-controller="GioHang" asp-route-Id="@item.MaMonAn" class="btn btn-primary">Mua ngay</a>
             </div>

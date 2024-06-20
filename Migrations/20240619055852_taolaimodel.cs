@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebDatMonAn.Migrations
 {
     /// <inheritdoc />
-    public partial class taomodellai : Migration
+    public partial class taolaimodel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,33 +28,49 @@ namespace WebDatMonAn.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "NhaCungCaps",
+                name: "DiaDiems",
                 columns: table => new
                 {
-                    MaNCC = table.Column<int>(type: "int", nullable: false)
+                    MaDD = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenNCC = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SoDienThoai = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TenTinhThanh = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TenQuanHuyen = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TenPhuongXa = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DiaChiCuThe = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NhaCungCaps", x => x.MaNCC);
+                    table.PrimaryKey("PK_DiaDiems", x => x.MaDD);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NhanViens",
+                columns: table => new
+                {
+                    MaNV = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TenNV = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MatKhau = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DienThoai = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NhanViens", x => x.MaNV);
                 });
 
             migrationBuilder.CreateTable(
                 name: "PhanQuyens",
                 columns: table => new
                 {
-                    MaPQ = table.Column<int>(type: "int", nullable: false)
+                    MaCN = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenQuyen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MoTa = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PhanQuyens", x => x.MaPQ);
+                    table.PrimaryKey("PK_PhanQuyens", x => x.MaCN);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,42 +79,14 @@ namespace WebDatMonAn.Migrations
                 {
                     MaShip = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Ten = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TenDN = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoDienThoai = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CongTy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NgayLayDon = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    MatKhau = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Shippers", x => x.MaShip);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TrangThais",
-                columns: table => new
-                {
-                    MaTrangThai = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TenTrangThai = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MoTa = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TrangThais", x => x.MaTrangThai);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ViTris",
-                columns: table => new
-                {
-                    MaVT = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TenVT = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MoTa = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ViTris", x => x.MaVT);
                 });
 
             migrationBuilder.CreateTable(
@@ -113,6 +101,7 @@ namespace WebDatMonAn.Migrations
                     MoTa = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TrangThai = table.Column<int>(type: "int", nullable: false),
                     SoLuong = table.Column<int>(type: "int", nullable: false),
+                    DiaChiQuan = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DonGia = table.Column<double>(type: "float", nullable: false),
                     Video = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -130,10 +119,10 @@ namespace WebDatMonAn.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TaiKhoans",
+                name: "KhachHangs",
                 columns: table => new
                 {
-                    MaTK = table.Column<int>(type: "int", nullable: false)
+                    MaKH = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenTK = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MatKhau = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -141,48 +130,45 @@ namespace WebDatMonAn.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NgaySinh = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DienThoai = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SoDienThoai = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Hinh = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TrangThai = table.Column<int>(type: "int", nullable: false),
-                    MaVT = table.Column<int>(type: "int", nullable: false),
-                    MaPQ = table.Column<int>(type: "int", nullable: false)
+                    MaDD = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TaiKhoans", x => x.MaTK);
+                    table.PrimaryKey("PK_KhachHangs", x => x.MaKH);
                     table.ForeignKey(
-                        name: "FK_TaiKhoans_PhanQuyens_MaPQ",
-                        column: x => x.MaPQ,
-                        principalTable: "PhanQuyens",
-                        principalColumn: "MaPQ",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TaiKhoans_ViTris_MaVT",
-                        column: x => x.MaVT,
-                        principalTable: "ViTris",
-                        principalColumn: "MaVT",
+                        name: "FK_KhachHangs_DiaDiems_MaDD",
+                        column: x => x.MaDD,
+                        principalTable: "DiaDiems",
+                        principalColumn: "MaDD",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "DanhGias",
+                name: "CTCNs",
                 columns: table => new
                 {
-                    MaDG = table.Column<int>(type: "int", nullable: false)
+                    MaCT = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NguoiDanhGia = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NoiDung = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TrangThai = table.Column<int>(type: "int", nullable: false),
-                    MaMonAn = table.Column<int>(type: "int", nullable: false)
+                    MaCN = table.Column<int>(type: "int", nullable: false),
+                    MaNV = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DanhGias", x => x.MaDG);
+                    table.PrimaryKey("PK_CTCNs", x => x.MaCT);
                     table.ForeignKey(
-                        name: "FK_DanhGias_MonAns_MaMonAn",
-                        column: x => x.MaMonAn,
-                        principalTable: "MonAns",
-                        principalColumn: "MaMonAn",
+                        name: "FK_CTCNs_NhanViens_MaNV",
+                        column: x => x.MaNV,
+                        principalTable: "NhanViens",
+                        principalColumn: "MaNV",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CTCNs_PhanQuyens_MaCN",
+                        column: x => x.MaCN,
+                        principalTable: "PhanQuyens",
+                        principalColumn: "MaCN",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -199,23 +185,32 @@ namespace WebDatMonAn.Migrations
                     loaivanchuyen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     phivanchuyen = table.Column<double>(type: "float", nullable: false),
                     ghichu = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MaTK = table.Column<int>(type: "int", nullable: false),
-                    MaTrangThai = table.Column<int>(type: "int", nullable: false)
+                    TrangThaiDonHang = table.Column<int>(type: "int", nullable: false),
+                    Toado = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MaKH = table.Column<int>(type: "int", nullable: false),
+                    MaShip = table.Column<int>(type: "int", nullable: false),
+                    MaNV = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_HoaDons", x => x.MaHD);
                     table.ForeignKey(
-                        name: "FK_HoaDons_TaiKhoans_MaTK",
-                        column: x => x.MaTK,
-                        principalTable: "TaiKhoans",
-                        principalColumn: "MaTK",
+                        name: "FK_HoaDons_KhachHangs_MaKH",
+                        column: x => x.MaKH,
+                        principalTable: "KhachHangs",
+                        principalColumn: "MaKH",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_HoaDons_TrangThais_MaTrangThai",
-                        column: x => x.MaTrangThai,
-                        principalTable: "TrangThais",
-                        principalColumn: "MaTrangThai",
+                        name: "FK_HoaDons_NhanViens_MaNV",
+                        column: x => x.MaNV,
+                        principalTable: "NhanViens",
+                        principalColumn: "MaNV",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_HoaDons_Shippers_MaShip",
+                        column: x => x.MaShip,
+                        principalTable: "Shippers",
+                        principalColumn: "MaShip",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -228,6 +223,7 @@ namespace WebDatMonAn.Migrations
                     MaHD = table.Column<int>(type: "int", nullable: false),
                     MaMonAn = table.Column<int>(type: "int", nullable: false),
                     soluongban = table.Column<int>(type: "int", nullable: false),
+                    dongiaban = table.Column<float>(type: "real", nullable: false),
                     tongtien = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
@@ -247,6 +243,37 @@ namespace WebDatMonAn.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "DanhGias",
+                columns: table => new
+                {
+                    MaDG = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NoiDung = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TrangThai = table.Column<int>(type: "int", nullable: false),
+                    MaHoaDon = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DanhGias", x => x.MaDG);
+                    table.ForeignKey(
+                        name: "FK_DanhGias_HoaDons_MaHoaDon",
+                        column: x => x.MaHoaDon,
+                        principalTable: "HoaDons",
+                        principalColumn: "MaHD",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CTCNs_MaCN",
+                table: "CTCNs",
+                column: "MaCN");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CTCNs_MaNV",
+                table: "CTCNs",
+                column: "MaNV");
+
             migrationBuilder.CreateIndex(
                 name: "IX_CTHDs_MaHD",
                 table: "CTHDs",
@@ -258,39 +285,42 @@ namespace WebDatMonAn.Migrations
                 column: "MaMonAn");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DanhGias_MaMonAn",
+                name: "IX_DanhGias_MaHoaDon",
                 table: "DanhGias",
-                column: "MaMonAn");
+                column: "MaHoaDon");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HoaDons_MaTK",
+                name: "IX_HoaDons_MaKH",
                 table: "HoaDons",
-                column: "MaTK");
+                column: "MaKH");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HoaDons_MaTrangThai",
+                name: "IX_HoaDons_MaNV",
                 table: "HoaDons",
-                column: "MaTrangThai");
+                column: "MaNV");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HoaDons_MaShip",
+                table: "HoaDons",
+                column: "MaShip");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_KhachHangs_MaDD",
+                table: "KhachHangs",
+                column: "MaDD");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MonAns_MaDanhMuc",
                 table: "MonAns",
                 column: "MaDanhMuc");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TaiKhoans_MaPQ",
-                table: "TaiKhoans",
-                column: "MaPQ");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TaiKhoans_MaVT",
-                table: "TaiKhoans",
-                column: "MaVT");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CTCNs");
+
             migrationBuilder.DropTable(
                 name: "CTHDs");
 
@@ -298,31 +328,28 @@ namespace WebDatMonAn.Migrations
                 name: "DanhGias");
 
             migrationBuilder.DropTable(
-                name: "NhaCungCaps");
-
-            migrationBuilder.DropTable(
-                name: "Shippers");
-
-            migrationBuilder.DropTable(
-                name: "HoaDons");
+                name: "PhanQuyens");
 
             migrationBuilder.DropTable(
                 name: "MonAns");
 
             migrationBuilder.DropTable(
-                name: "TaiKhoans");
-
-            migrationBuilder.DropTable(
-                name: "TrangThais");
+                name: "HoaDons");
 
             migrationBuilder.DropTable(
                 name: "DanhMucs");
 
             migrationBuilder.DropTable(
-                name: "PhanQuyens");
+                name: "KhachHangs");
 
             migrationBuilder.DropTable(
-                name: "ViTris");
+                name: "NhanViens");
+
+            migrationBuilder.DropTable(
+                name: "Shippers");
+
+            migrationBuilder.DropTable(
+                name: "DiaDiems");
         }
     }
 }

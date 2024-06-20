@@ -1,4 +1,253 @@
-﻿<main>
+﻿<style>
+
+
+    .tieude {
+        /* margin-left: px; */
+    }
+
+        .tieude > p {
+            font-weight: bold;
+            color: #CC0000;
+        }
+
+    ul > li.list-img > a img {
+        width: 150px;
+        border-radius: 10px;
+    }
+
+    .list-img {
+        list-style: none;
+    }
+
+    ul > li.list-img > img:hover {
+        cursor: pointer;
+    }
+
+    .anh-face {
+        width: 500px;
+        height: 450px;
+    }
+
+    .thongtin {
+        text-align: left;
+    }
+
+        .thongtin > h2 {
+            color: #CC0000;
+            font-weight: 700;
+        }
+
+        .thongtin > h3 {
+            font-weight: 600;
+            font-weight: bolder;
+        }
+
+    .so-luong {
+        list-style: none;
+        display: inline;
+    }
+
+        .so-luong > button {
+            border-radius: 100%;
+            background-color: #CC0000;
+            transition: all 0.5s;
+            border-color: white;
+        }
+
+            .so-luong > button:hover {
+                background-color: aliceblue;
+            }
+
+    .nhap-soluong {
+        width: 35px;
+    }
+
+    .btn-themvaogiohang {
+        margin-top: 20px;
+    }
+
+        .btn-themvaogiohang > button {
+            padding: 7px 10px;
+            border-radius: 20px;
+            background-color: #CC0000;
+            color: azure;
+            transition: all 0.3s;
+            border: #CC0000;
+        }
+
+            .btn-themvaogiohang > button:hover {
+                background-color: aliceblue;
+                color: black;
+                padding: 10px 14px;
+            }
+
+    .mota {
+        margin-top: 15px;
+    }
+
+    .list-danhmuckhac {
+        margin-top: 30px;
+    }
+
+        .list-danhmuckhac > p {
+            text-align: left;
+        }
+
+            .list-danhmuckhac > p > a {
+                text-decoration: none;
+                color: #CC0000;
+                font-weight: 700;
+            }
+
+    .danhgia {
+        margin-top: 50px;
+        /* margin-left: 200px; */
+        border: 2px solid rgb(203, 192, 192);
+        width: 900px;
+        padding: 50px 70px;
+        border-radius: 20px;
+    }
+
+    .form-danhgia {
+        margin-top: 20px;
+        display: flex;
+    }
+
+    .form-control {
+        width: 600px;
+    }
+
+    .btn-danhgia {
+        margin-left: 10px;
+        margin-top: 42px;
+    }
+
+        .btn-danhgia > button {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #3d405b;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 17px;
+            padding: 16px;
+            width: 130px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+            .btn-danhgia > button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+                .btn-danhgia > button span:after {
+                    content: '»';
+                    position: absolute;
+                    opacity: 0;
+                    top: 0;
+                    right: -15px;
+                    transition: 0.5s;
+                }
+
+            .btn-danhgia > button:hover span {
+                padding-right: 15px;
+            }
+
+                .btn-danhgia > button:hover span:after {
+                    opacity: 1;
+                    right: 0;
+                }
+
+    .danhgiakhac {
+        margin-top: 30px;
+        border: 1px solid black;
+        padding: 30px;
+        background-color: rgba(249, 248, 248, 0.93);
+        border-radius: 20px;
+    }
+
+    .danhgianoibat {
+        margin-top: 30px;
+    }
+
+    .list-danhgia {
+        list-style: none;
+    }
+
+    .danhgianoibat > ul {
+        display: flex;
+    }
+
+    .face-danhgia {
+        width: 60px;
+        border-radius: 100%;
+    }
+
+    .ngdanhgia {
+        margin-left: 20px;
+    }
+
+    .giamgia {
+        margin-top: 30px;
+    }
+
+    .form-giamgia tr td {
+        border-bottom: 1px solid;
+    }
+
+    .anhgiamgia {
+        width: 100px;
+    }
+
+    .form-giamgia {
+        margin-top: 30px;
+    }
+
+    table tr td {
+        padding: 0 30px;
+    }
+
+    .tenmongiam {
+        color: #CC0000;
+        font-weight: 700;
+    }
+
+    .btn-giamgia {
+        margin-left: 5px;
+        padding: 5px 10px;
+        border-radius: 10px;
+        background-color: #CC0000;
+        border-color: #CC0000;
+        transition: all 0.3s;
+    }
+
+        .btn-giamgia:hover {
+            padding: 7px 15px;
+        }
+
+    .gia {
+        margin-bottom: 20px;
+    }
+
+    .matgia {
+        text-decoration: line-through;
+    }
+
+    .matgia {
+        line-height: 1px;
+    }
+
+    .giagiam {
+        color: #CC0000;
+        font-weight: 900;
+    }
+
+</style>
+<main>
     <div class="container">
         <div class="tieude">
             <p>Food Anh Tai -> Chi tiết sản phẩm -> @Model.TenMonAn</p>
@@ -11,8 +260,9 @@
                 <div class="col-5">
                     <div class="thongtin">
                         <h2>@Model.TenMonAn</h2>
-                        <h3>@Model.DonGia Đ</h3>
-                        <h3><b>Danh Mục:</b>@Model.DanhMuc.TenDanhMuc </h3>
+                        <h5>@Model.DonGia Đ</h5>
+                        <h5><b>Danh Mục:</b>@Model.DanhMuc.TenDanhMuc </h5>
+                        <h5>@Model.DiaChiQuan</h5>
                         <p>Số lượng :</p>
                       <form asp-action="ThemCart" asp-controller="GioHang" asp-route-Id="@Model.MaMonAn">
                             <div class="input-group quantity mb-5" style="width: 100px;">
@@ -51,6 +301,25 @@
                 </div>
             </div>
         </div>
+
+       
+                    <vc:mon-ans></vc:mon-ans>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thêm Vào Giỏ Hàng</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <a asp-action="ThemCart" asp-controller="GioHang" asp-route-Id="@Model.MaMonAn" class="btn btn-primary" style="width:100%;">Mua ngay</a>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
         <div class="danhgia">
             <div>
                 <h4>Đánh giá Món ăn : @Model.TenMonAn</h4>

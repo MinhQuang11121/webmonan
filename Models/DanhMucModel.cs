@@ -8,11 +8,12 @@ namespace WebDatMonAn.Models
         public int MaDanhMuc { get; set; }
 
         [Required(ErrorMessage = "Yêu cầu nhập tên danh mục ")]
-        public string TenDanhMuc{ get; set; }
+        public string TenDanhMuc { get; set; }
         public string SlugDanhMuc { get; set; }
 
-        [Required(ErrorMessage = "Yêu cầu nhập nội dung danh mục")]
+        [Required(ErrorMessage = "Yêu cầu nhập nội dung  danh mục")]
         public string MoTa { get; set; }
         public int TrangThai { get; set; }
     }
+
 }

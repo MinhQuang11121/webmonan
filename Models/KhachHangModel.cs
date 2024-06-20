@@ -3,24 +3,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebDatMonAn.Models
 {
-    public class TaiKhoanModel
+    public class KhachHangModel
     {
         [Key]
-        public int MaTK { get; set; }
+        public int MaKH { get; set; }
         public string TenTK { get; set; }
         public string MatKhau { get; set; }
         public string DiaChi { get; set; }
         public string Email { get; set; }
         public DateTime NgaySinh { get; set; }
         public DateTime NgayTao { get; set; }
-        public string DienThoai { get; set; }
+        public string SoDienThoai { get; set; }
         public string Hinh { get; set; }
         public int TrangThai { get; set; }
-        public int MaVT { get; set; }
-        [ForeignKey("MaVT")]
-        public ViTriModel ViTri { get; set; }
-        public int MaPQ { get; set; }
-        [ForeignKey("MaPQ")]
-        public PhanQuyenModel PhanQuyen { get; set; }
+        public int MaDD { get; set; }
+        [ForeignKey("MaDD")]
+        public DiaDiemModel DiaDiem { get; set; }
+
     }
 }

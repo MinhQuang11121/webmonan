@@ -8,13 +8,13 @@ namespace WebDatMonAn.Models
         [Key]
         public int MaDG { get; set; }
     
-         public string NguoiDanhGia { get; set; }
+   
         public string NoiDung { get; set; }
         public int TrangThai { get; set; }
 
        
-        public int MaMonAn { get; set; }
-        [ForeignKey("MaMonAn")]
-        public MonAnModel MonAn { get; set; }
+        public int MaHoaDon { get; set; }
+        [ForeignKey("MaHoaDon")]
+        public HoaDonModel HoaDon { get; set; }
     }
 }

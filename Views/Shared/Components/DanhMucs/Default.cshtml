@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<DanhMucModel>
 @foreach (var item in Model)
 {
-    <li class="menu-item-2 mt-3"><a asp-action="Index" asp-controller="DanhMuc" asp-route-Slug="@item.SlugDanhMuc" style="text-decoration:none;">@item.TenDanhMuc</a></li>
+    <li class="menu-item-2 mt-3"><a asp-action="Index" asp-controller="DanhMuc" asp-route-Slug="@item.SlugDanhMuc" style="text-decoration:none; ">@item.TenDanhMuc</a></li>
 }

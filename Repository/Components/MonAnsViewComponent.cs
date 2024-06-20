@@ -3,17 +3,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebDatMonAn.Repository.Components
 {
-    public class DanhMucsViewComponent:ViewComponent
+    public class MonAnsViewComponent:ViewComponent
     {
         private readonly DataContext _dataContext;
-        public DanhMucsViewComponent(DataContext dataContext)
+        public MonAnsViewComponent(DataContext dataContext)
         {
             _dataContext = dataContext;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var danhMucs = await _dataContext.DanhMucs.Take(3).ToListAsync();
-            return View(danhMucs);
+            var monan = await _dataContext.MonAns.Include(c=>c.DanhMuc).OrderByDescending(x=>x.NgayTao).Take(3).ToListAsync();
+            return View(monan);
         }
     }
 }
