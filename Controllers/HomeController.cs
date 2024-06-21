@@ -20,8 +20,8 @@ namespace WebDatMonAn.Controllers
         public IActionResult Index()
 
         {
-          
-            var monan = _dataContext.MonAns.Include(c => c.DanhMuc).AsNoTracking().Where(d=>d.TrangThai==1).OrderBy(x => x.NgayTao).Take(8).ToList();
+
+            var monan = _dataContext.MonAns.Include(c => c.DanhMuc).AsNoTracking().Where(d => d.TrangThai == 1).OrderBy(x => x.NgayTao).Take(8).ToList();
             return View(monan);
         }
         public IActionResult TimKiem(string? query)
@@ -46,7 +46,7 @@ namespace WebDatMonAn.Controllers
         public IActionResult Tatcamonan()
         {
             var monan = _dataContext.MonAns.Include(c => c.DanhMuc).AsNoTracking().OrderBy(x => x.NgayTao).Where(d => d.TrangThai == 1).ToList();
-            return View(monan);
+            return View("Index",monan);
 
            
         }

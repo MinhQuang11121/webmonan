@@ -1,17 +1,19 @@
-﻿@model IEnumerable<MonAnModel>
-@foreach (var item in Model)
+﻿@foreach (var item in Model)
 {
-    <div class="col m-1">
-        <div class="card" style="width: 18rem;;">
-            <a asp-action="Detail" asp-controller="Home" asp-route-Id="@item.MaMonAn" style="text-decoration:none;color:black;">
-                <img src="~/image/monan/@item.HinhAnh" class="card-img-top" alt="..." style="height:300px;">
-            </a>
-            <div class="card-body">
-                <a asp-action="Detail" asp-controller="Home" asp-route-Id="@item.MaMonAn" style="text-decoration:none;color:black;">
-                    <h4 class="card-title">@(item.TenMonAn.Length > 16 ? item.TenMonAn.Substring(0, 16) : item.TenMonAn)...</h4>
-                    <h5 class="card-text">@item.DonGia.ToString("#,###0") đ</h5>
-                </a>
-                <a asp-action="ThemCart" asp-controller="GioHang" asp-route-Id="@item.MaMonAn" class="btn btn-primary">Mua ngay</a>
+    <div class="col-md-6 col-lg-4 col-xl-3">
+
+        <div class="rounded position-relative fruite-item">
+            <div class="fruite-img">
+                <img src="~/image/monan/@item.HinhAnh" class="img-fluid w-100 rounded-top" alt="@item.TenMonAn">
+            </div>
+            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">@item.DanhMuc.TenDanhMuc</div>
+            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                <h4>@(item.TenMonAn.Length > 16 ? item.TenMonAn.Substring(0, 16) : item.TenMonAn)...</h4>
+                <p>@(item.DiaChiQuan.Length > 16 ? item.DiaChiQuan.Substring(0, 16) : item.DiaChiQuan)...</p>
+                <div class="d-flex justify-content-between flex-lg-wrap">
+                    <p class="text-dark fs-5 fw-bold mb-0">@item.DonGia.ToString("#,###0") đ</p>
+                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                </div>
             </div>
         </div>
     </div>
