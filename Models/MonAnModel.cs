@@ -29,7 +29,7 @@ namespace WebDatMonAn.Models
         [Required]
         public string Video { get; set; }
 
-        [Required, MinLength(4, ErrorMessage = " Yêu cầu nhập Ngày tạo")]
+        [Required(ErrorMessage = "Yêu cầu nhập Ngày tạo")]
         [DataType(DataType.DateTime)]
         public DateTime NgayTao { get; set; }
 
@@ -43,9 +43,6 @@ namespace WebDatMonAn.Models
         [FileExtensions]
         public IFormFile? ImageUpload { get; set; }
 
-        public MonAnModel()
-        {
-            NgayTao = DateTime.Now;
-        }
+       
     }
 }

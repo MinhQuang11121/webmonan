@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebDatMonAn.Models;
@@ -10,17 +11,19 @@ namespace WebDatMonAn.Controllers
     {
         private readonly DataContext _dataContext;
         private readonly ILogger<HomeController> _logger;
+        private readonly INotyfService _notyfService;
 
-        public HomeController(ILogger<HomeController> logger, DataContext context)
+        public HomeController(ILogger<HomeController> logger, DataContext context,INotyfService notyfService)
         {
             _dataContext = context;
             _logger = logger;
+            _notyfService = notyfService;
         }
 
         public IActionResult Index()
 
         {
-
+            
             var monan = _dataContext.MonAns.Include(c => c.DanhMuc).AsNoTracking().Where(d => d.TrangThai == 1).OrderBy(x => x.NgayTao).Take(8).ToList();
             return View(monan);
         }
@@ -33,60 +36,25 @@ namespace WebDatMonAn.Controllers
                 || p.DonGia.ToString().Contains(query) ||
                 p.DanhMuc.TenDanhMuc.Contains(query));
             }
-            return View(monans.ToList());
+			_notyfService.Success("kết quả tìm kiếm thành công!");
+			return View(monans.ToList());
         }
          
         public async  Task<IActionResult> Detail( int Id)
         {
             if (Id == null) return RedirectToAction("Index");
             var monan =   _dataContext.MonAns.Include(x => x.DanhMuc).Where(p => p.MaMonAn == Id).FirstOrDefault();
-
-            return View(monan);
+			_notyfService.Success("truy cập  thành công!");
+			return View(monan);
         }
         public IActionResult Tatcamonan()
         {
             var monan = _dataContext.MonAns.Include(c => c.DanhMuc).AsNoTracking().OrderBy(x => x.NgayTao).Where(d => d.TrangThai == 1).ToList();
-            return View("Index",monan);
+            return View("Tatcamonan",monan);
 
            
         }
-        public async Task<IActionResult> Giacao()
-        {
-            var monAns = await _dataContext.MonAns
-                                            .Where(c => c.TrangThai == 1)
-                                           .OrderBy(m => m.DonGia) 
-                                           .ToListAsync();
-            return View("Tatcamonan", monAns);
-        }
-        public async Task<IActionResult> Giathap()
-        {
-            var monAns = await _dataContext.MonAns
-                                            .Where(c=>c.TrangThai ==1).
-                                             OrderByDescending(m => m.DonGia)
-                                           .ToListAsync();
-            return View("Tatcamonan", monAns);
-        }
-        public async Task<IActionResult> Gia50K()
-        {
-            var monAns = await _dataContext.MonAns
-                                       .Where(m => m.DonGia <= 50000)
-                                       .ToListAsync();
-            return View("Tatcamonan", monAns);
-        }
-        public async Task<IActionResult> Gia50KDen100k()
-        {
-            var monAns = await _dataContext.MonAns
-                                       .Where(m => m.DonGia <= 100000 && m.DonGia >=50000)
-                                       .ToListAsync();
-            return View("Tatcamonan", monAns);
-        }
-        public async Task<IActionResult> Tren100K()
-        {
-            var monAns = await _dataContext.MonAns
-                                       .Where(m => m.DonGia >= 100000)
-                                       .ToListAsync();
-            return View("Tatcamonan", monAns);
-        }
+       
         public IActionResult Privacy()
         {
             return View();

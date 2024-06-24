@@ -1,35 +1,23 @@
 ﻿@model IEnumerable<MonAnModel>
 
-    <div class="giamgia">
-        <h5>Món đang giảm</h5>
-        <div class="form-giamgia">
-            <table>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <img class="anhgiamgia" src="~/image/monan/@item.HinhAnh">
-                    </td>
-                    <td>
-                        <h6 class="tenmongiam">Combo @item.MaMonAn :@item.TenMonAn</h6>
-                        <p>@item.DiaChiQuan</p>
-                    </td>
-                    <td class="gia">
-                        <!-- <p class="matgia">30.000đ</p> -->
-                        <h6 class="giagiam"> @item.DonGia  đ</h6>
-                    </td>
-                    <td>
-                       
-                            <button class="btn-giamgia" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="fa-sharp fa-solid fa-plus"></i>
-                            </button>
-
-                    </td>
-                </tr>
-                }
-            </table>
-       
-
-        <!-- Modal -->
-        
-    </div>
+@foreach (var item in Model)
+{
+	<div class="col-md-3 col-xs-6">
+		<div class="product">
+			<div class="product-img">
+				<img src="~/image/monan/@item.HinhAnh" alt="@item.TenMonAn">
+			</div>
+			<div class="product-body">
+				<p class="product-category">@item.DanhMuc.TenDanhMuc</p>
+				<h3 class="product-name"><a asp-action="Detail" asp-controller="Home" asp-route-Id="@item.MaMonAn">@(item.TenMonAn.Length > 16 ? item.TenMonAn.Substring(0, 16) : item.TenMonAn)...</a></h3>
+				<h4 class="product-price">@item.DonGia.ToString("#,###0") đ</h4>
+				<div class="product-rating">
+				</div>
+				
+			</div>
+			<div class="add-to-cart">
+				<a asp-action="ThemCart" asp-controller="GioHang" asp-route-Id="@item.MaMonAn" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Mua ngay</a>
+			</div>
+		</div>
+	</div>
+}

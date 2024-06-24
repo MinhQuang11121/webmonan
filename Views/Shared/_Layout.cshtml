@@ -1,69 +1,62 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <title>Fruitables - Vegetable Website Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet">
+	<title>Food</title>
 
-    <!-- Icon Font Stylesheet -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="~/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="~/client/css/bootstrap.min.css" />
+
+	<!-- Slick -->
+	<link type="text/css" rel="stylesheet" href="~/client/css/slick.css" />
+	<link type="text/css" rel="stylesheet" href="~/client/css/slick-theme.css" />
+
+	<!-- nouislider -->
+	<link type="text/css" rel="stylesheet" href="~/client/css/nouislider.min.css" />
+
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="~/client/css/font-awesome.min.css">
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="~/client/css/style.css" />
+	<!-- Icon Font Stylesheet -->
 
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="~/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Template Stylesheet -->
-    <link href="~/css/style.css" rel="stylesheet">
 </head>
-
 <body>
+	<!-- HEADER -->
+	@Html.Partial("_HeaderPartial")
+	<!-- /HEADER -->
+	<!-- NAVIGATION -->
+	@RenderBody()
+	<!-- /SECTION -->
+	<!-- FOOTER -->
+	@Html.Partial("_Footer")
+	<!-- /FOOTER -->
+	<!-- jQuery Plugins -->
+	<script src="~/client/js/jquery.min.js"></script>
+	<script src="~/client/js/bootstrap.min.js"></script>
+	<script src="~/client/js/slick.min.js"></script>
+	<script src="~/client/js/nouislider.min.js"></script>
+	<script src="~/client/js/jquery.zoom.min.js"></script>
+	<script src="~/client/js/main.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-  @Html.Partial("_HeaderPartial")
-    <!-- Navbar End -->
-    <!-- Modal Search Start -->
-  
-    <!-- Modal Search End -->
-    <!-- Hero Start -->
-    @RenderBody()
-    <!-- Hero End -->
-    <!-- Featurs Section Start -->
- 
-    <!-- Featurs Section End -->
-    <!-- Fruits Shop Start-->
-   
-    <!-- Fruits Shop End-->
-    <!-- Featurs Start -->
-    
 
+	<!-- Template Javascript -->
+	<script src="~/client/js/main.js"></script>
+	<script src="~/client/js/giohang.js"></script>
+	@await Component.InvokeAsync("Notyf")
 
-    <!-- Tastimonial End -->
-    <!-- Footer Start -->
-   
-    @Html.Partial("_Footer")
+	@await RenderSectionAsync("Scripts", required: false)
 
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/easing/easing.min.js"></script>
-    <script src="~/lib/waypoints/waypoints.min.js"></script>
-    <script src="~/lib/lightbox/js/lightbox.min.js"></script>
-    <script src="~/lib/owlcarousel/owl.carousel.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="~/js/main.js"></script>
 </body>
-
 </html>

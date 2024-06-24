@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebDatMonAn.Models;
 using WebDatMonAn.Repository;
@@ -9,36 +10,41 @@ namespace WebDatMonAn.Area.Admin.Controllers
     public class DanhMucController : Controller
     {
         private readonly DataContext _dataContext;
-        public DanhMucController(DataContext dataContext)
+        private readonly INotyfService _notyfService;
+		public DanhMucController(DataContext dataContext, INotyfService notyfService)
         {
+            _notyfService = notyfService;
             _dataContext = dataContext;
         }
-        [HttpGet]
+        [HttpGet] 
         public IActionResult Index()
         {
+            _notyfService.Success("Truy cập thành công!");
             var danhmuc = _dataContext.DanhMucs.OrderByDescending(c => c.MaDanhMuc).ToList();
+         
             return View(danhmuc);
         }
         [HttpGet]
         public IActionResult Create()
         {
+            _notyfService.Success("Thêm mới danh mục!");
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DanhMucModel danhMuc)
         {
-
+            
             danhMuc.SlugDanhMuc = danhMuc.TenDanhMuc.Replace(" ", "-");
             var tendanhmuc = await _dataContext.DanhMucs.FirstOrDefaultAsync(p => p.TenDanhMuc == danhMuc.TenDanhMuc);
             if (tendanhmuc != null)
             {
-                ModelState.AddModelError("", "Danh mục đã có trong database");
+                _notyfService.Error("Danh mục đã có trong database");
                 return View(danhMuc);
             }
             _dataContext.Add(danhMuc);
             await _dataContext.SaveChangesAsync();
-            TempData["success"] = "Thêm danh mục thành công";
+            _notyfService.Success("Thêm mới danh mục thành công!");
             return RedirectToAction("Index");
 
         }

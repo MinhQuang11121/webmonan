@@ -1,35 +1,71 @@
 ﻿@model IEnumerable<MonAnModel>
+<!-- BREADCRUMB -->
 @Html.Partial("_SiderPartial")
-<div class="container-fluid fruite py-5">
-    <div class="container py-5">
-        <div class="tab-class text-center">
-            <div class="row g-4">
-                <div class="col-lg-4 text-start">
-                    <h1>Có @Model.Count() Món Ân</h1>
-                </div>
-                <div class="col-lg-8 text-end">
-                    <ul class="nav nav-pills d-inline-flex text-center mb-5">
-                        <li class="nav-item">
-                            <a class="d-flex m-2 py-2 bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
-                                <span class="text-dark" style="width: 130px;">Tất cả món ăn</span>
-                            </a>
-                        </li>
+@Html.Partial("_Navigation")
+<div id="breadcrumb" class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="breadcrumb-tree">
+					<li><a asp-action="Index" asp-controller="Home">Home</a></li>
+					<li><a href="#">Danh mục</a></li>
 
-                    </ul>
-                </div>
-            </div>
-            <div class="tab-content">
-                <div id="tab-1" class="tab-pane fade show p-0 active">
-                    <div class="row g-4">
-                        <div class="col-lg-12">
-                            <div class="row g-4">
-                                @Html.Partial("_DSMonAn")
-                            </div>
-                        </div>
-                    </div>
-                </div>
+					
+				</ul>
+			</div>
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<!-- ASIDE -->
+			<div id="aside" class="col-md-3">
+				<!-- aside Widget -->
+				<div class="aside">
+					<h3 class="aside-title">Danh mục</h3>
+					<div class="checkbox-filter">
 
-            </div>
-        </div>
-    </div>
+						<vc:tat-ca-danh-mucs></vc:tat-ca-danh-mucs>
+
+
+					</div>
+				</div>
+				<!-- /aside Widget -->
+				<!-- aside Widget -->
+				<vc:mon-an-ban-chay></vc:mon-an-ban-chay>
+			</div>
+			<!-- /ASIDE -->
+			<!-- STORE -->
+			<div id="store" class="col-md-9">
+				<!-- store top filter -->
+				<!-- store products -->
+				<div class="row">
+					<!-- product -->
+					@Html.Partial("_DSMonAn")
+
+
+
+
+
+
+
+				</div>
+				<!-- /store products -->
+
+
+			</div>
+			<!-- /STORE -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
 </div>

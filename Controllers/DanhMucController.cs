@@ -16,8 +16,8 @@ namespace WebDatMonAn.Controllers
         {
             DanhMucModel danhmuc = _dataContext.DanhMucs.Where(c => c.SlugDanhMuc == Slug).FirstOrDefault();
             if (danhmuc == null) return RedirectToAction("Index");
-            var monantheodanhmuc = _dataContext.MonAns.Where(p => p.MaDanhMuc == danhmuc.MaDanhMuc);
-            return View(await monantheodanhmuc.OrderByDescending(p=>p.MaDanhMuc).ToListAsync());
+            var monantheodanhmuc = _dataContext.MonAns.Include(c=>c.DanhMuc).Where(p => p.MaDanhMuc == danhmuc.MaDanhMuc);
+            return View(await monantheodanhmuc.Include(x=>x.DanhMuc).OrderByDescending(p=>p.MaDanhMuc).ToListAsync());
         }
     }
 }

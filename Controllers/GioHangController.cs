@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using WebDatMonAn.Models;
 using WebDatMonAn.Models.ViewModel;
 using WebDatMonAn.Repository;
@@ -8,9 +9,11 @@ namespace WebDatMonAn.Controllers
     public class GioHangController : Controller
     {
         private readonly DataContext _dataContext;
-        public GioHangController (DataContext context)
+        private readonly INotyfService _notyfService;
+        public GioHangController (DataContext context, INotyfService notyfService)
         {
             _dataContext = context;
+            _notyfService = notyfService;
         }
         public IActionResult GioHang()
         {
@@ -40,9 +43,9 @@ namespace WebDatMonAn.Controllers
             }
             else
             {
-                GiohangItems.SoLuong = quantity;
+                GiohangItems.SoLuong += quantity;
             }
-            TempData["SuccessMessage"] = "Thêm giỏ hàng thành công";
+            _notyfService.Success("Thêm giỏ hàng thành công!");
             HttpContext.Session.SetJson("GioHang", giohang);
             return RedirectToAction("GioHang");
         }
@@ -50,7 +53,7 @@ namespace WebDatMonAn.Controllers
         {
             List<GioHangModel> giohang = HttpContext.Session.GetJson<List<GioHangModel>>("GioHang") ?? new List<GioHangModel>();
             GioHangModel giohangVM = giohang.Where(c => c.MaMonAn == Id).FirstOrDefault();
-            if (giohangVM.SoLuong>= 1)
+            if (giohangVM.SoLuong> 1)
             {
                 --giohangVM.SoLuong;
             }
@@ -66,7 +69,8 @@ namespace WebDatMonAn.Controllers
             {
                 HttpContext.Session.SetJson("GioHang", giohang);
             }
-            return RedirectToAction("GioHang");
+			_notyfService.Success("Giam số lượng thành công!");
+			return RedirectToAction("GioHang");
 
         }
         public async Task<IActionResult> Increase(int Id)
@@ -89,9 +93,10 @@ namespace WebDatMonAn.Controllers
             {
                 HttpContext.Session.SetJson("GioHang", giohang);
             }
+			_notyfService.Success("Tăng số lượng thành công!");
 
 
-            return RedirectToAction("GioHang");
+			return RedirectToAction("GioHang");
         }
         public async Task<IActionResult> Remove(int Id)
         {
@@ -105,12 +110,14 @@ namespace WebDatMonAn.Controllers
             {
                 HttpContext.Session.SetJson("GioHang", giohang);
             }
-            return RedirectToAction("GioHang");
+			_notyfService.Success("Xóa món ăn thành công!");
+			return RedirectToAction("GioHang");
         }
         public async Task<IActionResult>XoaHet()
         {
             HttpContext.Session.Remove("GioHang");
-            return RedirectToAction("Index");
+			_notyfService.Success("Xóa giỏ hàng thành công!");
+			return RedirectToAction("GioHang");
         }
     }
 }

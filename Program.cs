@@ -1,3 +1,5 @@
+using AspNetCoreHero.ToastNotification.Notyf.Models;
+using AspNetCoreHero.ToastNotification;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebDatMonAn.Models;
@@ -12,29 +14,29 @@ builder.Services.AddDbContext<DataContext>(options => {
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(30);
-    options.Cookie.IsEssential = true;
+	options.IdleTimeout = TimeSpan.FromSeconds(30);
+	options.Cookie.IsEssential = true;
+});
+builder.Services.AddNotyf(config =>
+{
+	config.DurationInSeconds = 3;
+	config.IsDismissable = true;
+	config.Position = NotyfPosition.TopRight;
 });
 
+builder.Services.AddControllersWithViews();
 var app = builder.Build();
-
-
-
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-   
-    app.UseHsts();
+	app.UseExceptionHandler("/Home/Error");
+	app.UseHsts();
 }
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
-
 app.MapControllerRoute(
     name: "Areas",
     pattern: "{area:exists}/{controller=QuanTri}/{action=Index}/{id?}");
