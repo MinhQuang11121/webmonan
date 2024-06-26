@@ -34,6 +34,24 @@ namespace WebDatMonAn.Areas.Admin.Controllers
 
             return PartialView("Index", monan); 
         }
-
+        [HttpPost]
+        public IActionResult TimKH (string keyword)
+        {
+            List<KhachHangModel> khachang = new List<KhachHangModel>();
+            if(string.IsNullOrEmpty(keyword) || keyword.Length < 1)
+            {
+                return PartialView("khachhang", khachang);
+            }
+            var dsmonan = _dataContext.KhachHangs.AsNoTracking()
+                        .Include(c => c.DiaDiem)
+                        .Where(x => x.TenTK.Contains(keyword))
+                        .Where(x => x.DiaChi.Contains(keyword))
+                        .Where(x => x.DiaDiem.TenTinhThanh.Contains(keyword))
+                        .Where(x => x.DiaDiem.TenQuanHuyen.Contains(keyword))
+                        .Where(x => x.DiaDiem.TenPhuongXa.Contains(keyword))
+                        .ToList();
+        
+            return PartialView("khachhang", khachang);
+        }
     }
 }

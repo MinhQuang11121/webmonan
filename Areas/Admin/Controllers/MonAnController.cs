@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebDatMonAn.Models;
 using WebDatMonAn.Repository;
+using X.PagedList;
 
 namespace WebDatMonAn.Area.Admin.Controllers
 {
@@ -19,11 +20,16 @@ namespace WebDatMonAn.Area.Admin.Controllers
             _webHostEnviorment = webHostEnviorment;
             _notyfService = notyfService;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
-            var monan = _dataContext.MonAns.Include(c => c.DanhMuc).OrderBy(d => d.NgayTao).ToList();
+            int pageSize = 4;
+            int pagenumber = page == null || page < 0 ? 1 : page.Value;
+            var dsmonan = _dataContext.MonAns.AsNoTracking().Include(c => c.DanhMuc).OrderBy(d => d.NgayTao);
+            PagedList<MonAnModel> models = new PagedList<MonAnModel>(dsmonan, pagenumber, pageSize);
+            ViewBag.CurrentPage = pagenumber;
 
-            return View(monan);
+            return View(models);
+           
         }
         [HttpGet]
         public IActionResult Create()
