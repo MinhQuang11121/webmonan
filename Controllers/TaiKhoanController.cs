@@ -19,9 +19,9 @@ namespace WebDatMonAn.Controllers
         {
             return PartialView();
         }
+        [HttpGet]      
       
-      
-
+        
         public IActionResult Login()
         {
             return PartialView();

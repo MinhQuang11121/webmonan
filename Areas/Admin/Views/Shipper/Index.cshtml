@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ShipperModel>
+<main>
+    <div class="container-fluid px-4">
+        <h3 class="mt-4">Danh Sách danh mục</h3>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="QuanTri">Trang quản trị</a></li>
+            <li class="breadcrumb-item active">Tables</li>
+        </ol>
+
+        <div class="card mb-4">
+
+            <div class="card-body">
+                <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
+                    <div class="card">
+                      
+                    </div>
+
+                    <div class="datatable-container">
+                        <table id="myTable" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th data-sortable="true">
+                                        #
+                                    <th data-sortable="true">
+                                        Tên Shipper
+                                    </th>
+                                    <th data-sortable="true">
+                                       Số điện thoại
+                                    <th data-sortable="true">Email</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr data-index="0">
+                                        <td>@item.MaShip</td>
+                                        <td>@item.TenDN</td>
+                                        <td>@item.SoDienThoai</td>
+                                        <td>@item.Email</td>
+                                        
+
+                                      
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<
