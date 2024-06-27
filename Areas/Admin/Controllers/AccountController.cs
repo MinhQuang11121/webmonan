@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebDatMonAn.Repository;
@@ -7,7 +8,8 @@ namespace WebDatMonAn.Areas.Admin.Controllers
 {
 
     [Area("Admin")]
-    public class AccountController : Controller
+	[Authorize]
+	public class AccountController : Controller
     {
         private readonly DataContext _dataContext;
         public AccountController(DataContext dataContext)

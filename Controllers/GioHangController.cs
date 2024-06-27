@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebDatMonAn.Models;
 using WebDatMonAn.Models.ViewModel;
@@ -6,6 +7,7 @@ using WebDatMonAn.Repository;
 
 namespace WebDatMonAn.Controllers
 {
+    [Authorize]
     public class GioHangController : Controller
     {
         private readonly DataContext _dataContext;
@@ -45,7 +47,7 @@ namespace WebDatMonAn.Controllers
             {
                 GiohangItems.SoLuong += quantity;
             }
-            _notyfService.Success("Thêm giỏ hàng thành công!");
+            _notyfService.Success("Mua hàng thành công!");
             HttpContext.Session.SetJson("GioHang", giohang);
             return RedirectToAction("GioHang");
         }

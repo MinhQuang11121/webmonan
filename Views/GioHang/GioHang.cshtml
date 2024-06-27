@@ -187,7 +187,15 @@
             <p class="subtotal">Tổng tiền: @Model.TongTien đ</p>
             <p>Shipping: Flat rate: $3.00<br>Shipping to Ukraine.</p>
             <p class="total"><strong>Tổng tiền:@Model.TongTien đ</strong></p>
-            <button class="checkout-btn">Xác nhận</button>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a asp-action="ThanhToan" asp-controller="ThanhToan" class="checkout-btn">Thanh toán</a>
+        }
+        else
+        {
+            <a herf="/login.html?returnUrl=/ThanhToan.html" class="checkout-btn">Thanh toán</a>
+        }
+
         </div>
     </div>
 

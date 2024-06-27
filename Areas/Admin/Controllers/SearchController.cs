@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebDatMonAn.Models;
 using WebDatMonAn.Repository;
@@ -6,9 +7,10 @@ using WebDatMonAn.Repository;
 namespace WebDatMonAn.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    
+	[Authorize]
 
-    public class SearchController : Controller
+
+	public class SearchController : Controller
     {
         private readonly DataContext _dataContext;
         public SearchController(DataContext dataContext)

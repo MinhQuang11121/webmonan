@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebDatMonAn.Repository;
 
 namespace WebDatMonAn.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ShipperController : Controller
+	[Authorize]
+	public class ShipperController : Controller
     {
         private readonly DataContext _dataContext;
 

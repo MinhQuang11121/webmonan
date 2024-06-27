@@ -26,10 +26,11 @@
                                <input id="keyword" name="keyword" type="text" class="form-control" style="width:35%;" placeholder="Tìm kiếm" />
                            </div>
                            <div class="col">
-                              <select id="madanhmuc"  name="madanhmuc" class="form-control" asp-items="ViewBag.DanhMucs">
-                                <option>--chọn danh mục</option>
+                              <select class="form-control" id="txtCateID" name="txtCateID" asp-items="ViewBag.DanhMuc">
+                        <option value="0" selected>--Chọn Danh Mục--</option>
+                        <option value="all"> Chọn tất cả </option>
 
-                            </select>
+                        </select>
                            </div>
 
                        </div>
@@ -129,27 +130,58 @@
         </div>
     </div>
     @section Scripts{
-        <script>
-            $(document).ready(function () {
-                $("#keyword").keyup(function () {
-                    var strkeyword = $('#keyword').val();
-                    $.ajax({
-                        url:'/Admin/Search/TimMonAn/',
-                        datatype:'json',
-                        type:"POST",
-                        data: {keyword:strkeyword},
-                        async:true,
-                        success: function (results) {
-                            $("#records_table").html("");
-                            $("#records_table").html(results);
-                        },
-                        error: function (xhr) {
-                            alert('error');
-                        }
-                    })
-                })
-            });
-        </script>
+     <script>
+$(document).ready(function () {
+   
+    $("#txtCateID").change(function () {
+        var catID = $(this).children(":selected").val();
+        catID = parseFloat(catID);
+
+        console.log("Selected Category ID:", catID); 
+
+        $('#txtCateID option').prop('selected', false);
+        $("#txtCateID > [value=" + catID + "]").prop('selected', true);
+
+        $.ajax({
+            url: '/Admin/MonAn/Loc',
+            datatype: 'json',
+            type: "GET",
+            data: {
+                CateId: catID
+            },
+            async: true,
+            success: function (results) {
+                console.log("Ajax Success:", results); 
+                if (results.status == "success") {
+                    window.location.href = results.redirectUrl;
+                }
+            },
+            error: function (xhr) {
+                console.log("Ajax Error:", xhr); 
+                alert('error');
+            }
+        });
+    });
+
+    $("#keyword").keyup(function () {
+        var strkeyword = $('#keyword').val();
+        $.ajax({
+            url: '/Admin/Search/TimMonAn/',
+            datatype: 'json',
+            type: "POST",
+            data: { keyword: strkeyword },
+            async: true,
+            success: function (results) {
+                $("#records_table").html(results);
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+    });
+});
+</script>
+
     }
 </main>
 <

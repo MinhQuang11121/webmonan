@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebDatMonAn.Models;
@@ -7,7 +8,8 @@ using WebDatMonAn.Repository;
 namespace WebDatMonAn.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class QuyenController : Controller
+	[Authorize]
+	public class QuyenController : Controller
     {
         private readonly DataContext _dataContext;
         private readonly INotyfService _notyfService;

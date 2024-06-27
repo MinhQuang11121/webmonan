@@ -1,5 +1,7 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebDatMonAn.Models;
@@ -9,7 +11,8 @@ using X.PagedList;
 namespace WebDatMonAn.Area.Admin.Controllers
 {
     [Area("Admin")]
-    public class MonAnController : Controller
+	[Authorize]
+	public class MonAnController : Controller
     {
         private readonly DataContext _dataContext;
 		private readonly INotyfService _notyfService;
@@ -20,16 +23,34 @@ namespace WebDatMonAn.Area.Admin.Controllers
             _webHostEnviorment = webHostEnviorment;
             _notyfService = notyfService;
         }
-        public IActionResult Index(int? page)
+        public IActionResult Index(int page = 1, int CateID = 0)
         {
             int pageSize = 4;
-            int pagenumber = page == null || page < 0 ? 1 : page.Value;
-            var dsmonan = _dataContext.MonAns.AsNoTracking().Include(c => c.DanhMuc).OrderBy(d => d.NgayTao);
-            PagedList<MonAnModel> models = new PagedList<MonAnModel>(dsmonan, pagenumber, pageSize);
-            ViewBag.CurrentPage = pagenumber;
+            int pageNumber = page;
+            List<MonAnModel> dsmonan = new List<MonAnModel>();
+
+            if (CateID != 0)
+            {
+                dsmonan = _dataContext.MonAns.AsNoTracking()
+                    .Where(x => x.MaDanhMuc == CateID)
+                    .Include(x => x.DanhMuc)
+                    .OrderByDescending(x => x.MaMonAn)
+                    .ToList();
+            }
+            else
+            {
+                dsmonan = _dataContext.MonAns.AsNoTracking()
+                    .Include(x => x.DanhMuc)
+                    .OrderByDescending(x => x.MaMonAn)
+                    .ToList();
+            }
+
+            PagedList<MonAnModel> models = new PagedList<MonAnModel>(dsmonan.AsQueryable(), pageNumber, pageSize);
+            ViewBag.CurrentCateID = CateID;
+            ViewBag.CurrentPage = pageNumber;
+            ViewData["DanhMuc"] = new SelectList(_dataContext.DanhMucs, "MaDanhMuc", "TenDanhMuc", CateID);
 
             return View(models);
-           
         }
         [HttpGet]
         public IActionResult Create()
@@ -156,6 +177,16 @@ namespace WebDatMonAn.Area.Admin.Controllers
             var monAn = await _dataContext.MonAns.Include(x => x.DanhMuc).FirstOrDefaultAsync(x => x.MaMonAn == Id);
             ViewBag.DanhMucs = new SelectList(_dataContext.DanhMucs, "MaDanhMuc", "TenDanhMuc", monAn.MaDanhMuc);
             return View(monAn);
+        }
+        [HttpGet]
+        public IActionResult Loc(int CateId = 0)
+        {
+            var url = $"/Admin/MonAn?CateID={CateId}";
+            if(CateId == 0)
+            {
+                url=$"/Admin/MonAn";
+            }
+            return Json(new { status = "success", redirectUrl = url });
         }
     }
 }

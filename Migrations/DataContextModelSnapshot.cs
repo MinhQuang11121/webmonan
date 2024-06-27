@@ -212,21 +212,18 @@ namespace WebDatMonAn.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Toado")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TrangThaiDonHang")
                         .HasColumnType("int");
 
                     b.Property<string>("ghichu")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("loaivanchuyen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("phivanchuyen")
+                    b.Property<double?>("phivanchuyen")
                         .HasColumnType("float");
 
                     b.HasKey("MaHD");
@@ -249,7 +246,6 @@ namespace WebDatMonAn.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaKH"));
 
                     b.Property<string>("DiaChi")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -257,7 +253,6 @@ namespace WebDatMonAn.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Hinh")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MaDD")

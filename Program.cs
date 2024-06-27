@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebDatMonAn.Models;
 using WebDatMonAn.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
@@ -25,6 +26,18 @@ builder.Services.AddNotyf(config =>
 });
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+})
+.AddCookie(options =>
+{
+    options.LoginPath = "/TaiKhoan/Login";
+    options.LogoutPath = "/TaiKhoan/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {

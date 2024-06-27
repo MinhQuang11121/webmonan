@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebDatMonAn.Models;
 using WebDatMonAn.Repository;
@@ -7,7 +8,8 @@ using X.PagedList;
 namespace WebDatMonAn.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class KhachHangController : Controller
+	[Authorize]
+	public class KhachHangController : Controller
     {
         private readonly DataContext _dataContext;
         public KhachHangController(DataContext context)
