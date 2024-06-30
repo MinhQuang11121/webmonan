@@ -8,7 +8,7 @@ using WebDatMonAn.Repository;
 namespace WebDatMonAn.Area.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(AuthenticationSchemes = "AdminScheme", Policy = "AdminPolicy")]
+    [Authorize(AuthenticationSchemes = "AdminScheme")]
     public class DanhMucController : Controller
     {
         private readonly DataContext _dataContext;

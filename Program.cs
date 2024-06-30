@@ -16,7 +16,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.IdleTimeout = TimeSpan.FromDays(30);
     options.Cookie.IsEssential = true;
 });
 
@@ -38,10 +38,16 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     })
     .AddCookie("AdminScheme", options =>
     {
-        options.LoginPath = "/Admin/DangNhap/TaiKhoan";
-        options.LogoutPath = "/Admin/DangNhap/Logout";
-        options.AccessDeniedPath = "/Admin/DangNhap/TaiKhoan";
-    });
+        options.LoginPath = "/Admin/TaiKhoan/Login";
+        options.LogoutPath = "/Admin/TaiKhoan/Logout";
+        options.AccessDeniedPath = "/Admin/TaiKhoan/Login";
+    })
+.AddCookie("ShipperScheme", options =>
+ {
+     options.LoginPath = "/Shipper/DangNhap/Login";
+     options.LogoutPath = "/Shipper/DangNhap/login";
+     options.AccessDeniedPath = "/Shipper/DangNhap/Login";
+ });
 
 // Configure Authorization Policies
 builder.Services.AddAuthorization(options =>
@@ -50,6 +56,8 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("Role", "Admin"));
     options.AddPolicy("EmployeePolicy", policy =>
         policy.RequireClaim("Role", "Employee"));
+    options.AddPolicy("ShipperPolicy", policy =>
+        policy.RequireClaim("Role", "Shipper")); ;
 });
 
 var app = builder.Build();
@@ -64,8 +72,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseSession();          // Ensure this is called before UseAuthentication
-app.UseAuthentication();  // Ensure this is called before UseAuthorization
+app.UseSession();         
+app.UseAuthentication();  
 app.UseAuthorization();
 
 app.MapControllerRoute(

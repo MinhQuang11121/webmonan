@@ -60,25 +60,36 @@ namespace WebDatMonAn.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(ShipperModel shipper)
         {
-
-            var tenDN = await _dataContext.Shippers.FirstOrDefaultAsync(p => p.TenDN == shipper.TenDN);
-            if (tenDN != null)
+           
+            var existingShipper = await _dataContext.Shippers
+                .Where(p => p.TenDN == shipper.TenDN && p.MaShip != shipper.MaShip)
+                .FirstOrDefaultAsync();
+            if (existingShipper != null)
             {
-                _notyfService.Error("tên Tài khoản đã tồn tại!");
+                _notyfService.Error("Tên tài khoản đã tồn tại!");
                 return View(shipper);
             }
-            var shippers = _dataContext.Shippers.Find(shipper.MaShip);
+
+            var shippers = await _dataContext.Shippers.FindAsync(shipper.MaShip);
+            if (shippers == null)
+            {
+                _notyfService.Error("Shipper không tồn tại!");
+                return RedirectToAction("Index");
+            }
 
             shippers.TenDN = shipper.TenDN;
-            shippers.MatKhau = shipper.MatKhau;
+            shippers.MatKhau = shipper.MatKhau.Trim().ToMD5(); 
             shippers.SoDienThoai = shipper.SoDienThoai;
             shippers.Email = shipper.Email;
-            _dataContext.Update(shipper);
 
+            
+            _dataContext.Shippers.Update(shippers);
             await _dataContext.SaveChangesAsync();
-            _notyfService.Success(" Cập nhật  thành công!");
+
+            _notyfService.Success("Cập nhật thành công!");
             return RedirectToAction("Index");
         }
+
         public async Task<IActionResult> Delete(int Id)
         {
             ShipperModel shipper = await _dataContext.Shippers.FindAsync(Id);

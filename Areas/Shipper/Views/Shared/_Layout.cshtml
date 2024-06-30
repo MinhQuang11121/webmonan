@@ -38,7 +38,23 @@
         <input class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Tìm</button>
       </form>
-    </div>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="DangXuat" asp-controller="DangNhap">Đăng xuất</a>
+                            </li>
+                        }
+                        else
+                    {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Login" asp-controller="DangNhap">Đăng nhập</a>
+                            </li>
+                    }
+                    </ul>
+                   
+
+                </div>
   </div>
     </header>
    @RenderBody()

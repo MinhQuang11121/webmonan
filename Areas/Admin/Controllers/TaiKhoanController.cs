@@ -1,36 +1,37 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using WebDatMonAn.Models.ViewModel;
 using WebDatMonAn.Repository.Extension;
 using WebDatMonAn.Repository;
-using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebDatMonAn.Areas.Admin.Controllers
 {
     [Area("Admin")]
-  
-    public class DangNhapController : Controller
+    public class TaiKhoanController : Controller
     {
-
         private readonly DataContext _dataContext;
         private readonly INotyfService _notyfService;
-        public DangNhapController(DataContext dataContext, INotyfService notyfService)
+        public TaiKhoanController(DataContext dataContext, INotyfService notyfService)
 
         {
             _notyfService = notyfService;
             _dataContext = dataContext;
         }
         [HttpGet]
-        public IActionResult DangNhap(string returnUrl = null)
+        public IActionResult Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            return View();
+            return PartialView();
         }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> TaiKhoan(LoginViewModel login, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel login, string returnUrl = null)
         {
             try
             {
@@ -65,7 +66,7 @@ namespace WebDatMonAn.Areas.Admin.Controllers
             {
                 new Claim(ClaimTypes.Name, khachhang.TenNV),
                 new Claim("MaNV", khachhang.MaNV.ToString()),
-                new Claim(ClaimTypes.Role, "Admin") 
+                new Claim(ClaimTypes.Role, "Admin")
             };
 
                     ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "AdminScheme");
@@ -79,7 +80,7 @@ namespace WebDatMonAn.Areas.Admin.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "QuanTri", new { Area = "Admin" });
+                        return RedirectToAction("Index", "MonAn");
                     }
                 }
             }
@@ -98,12 +99,7 @@ namespace WebDatMonAn.Areas.Admin.Controllers
             HttpContext.SignOutAsync();
             HttpContext.Session.Remove("MaNV");
             _notyfService.Error("Bạn đã đăng xuất");
-            return RedirectToAction("TaiKhoan", "DangNhap");
+            return RedirectToAction("Login", "TaiKhoan");
         }
-
-
-
-
-
     }
 }
