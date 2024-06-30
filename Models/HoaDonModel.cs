@@ -15,6 +15,7 @@ namespace WebDatMonAn.Models
         public double? phivanchuyen { get; set; }
         public string? ghichu { get; set; }
         public int TrangThaiDonHang { get; set; }
+        public int? TrangThaiGiaoHang { get; set; }
         public string? Toado { get; set; }
 
         public int MaKH { get; set; }

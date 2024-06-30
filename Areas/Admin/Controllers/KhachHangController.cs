@@ -8,8 +8,8 @@ using X.PagedList;
 namespace WebDatMonAn.Areas.Admin.Controllers
 {
     [Area("Admin")]
-	[Authorize]
-	public class KhachHangController : Controller
+    [Authorize(AuthenticationSchemes = "AdminScheme")]
+    public class KhachHangController : Controller
     {
         private readonly DataContext _dataContext;
         public KhachHangController(DataContext context)

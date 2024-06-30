@@ -13,6 +13,7 @@ namespace WebDatMonAn.Repository.Components
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var danhMucs = await _dataContext.DanhMucs.Take(3).ToListAsync();
+            
             return View(danhMucs);
         }
     }

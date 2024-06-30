@@ -8,8 +8,8 @@ using WebDatMonAn.Repository;
 namespace WebDatMonAn.Areas.Admin.Controllers
 {
     [Area("Admin")]
-	[Authorize]
-	public class QuyenController : Controller
+    [Authorize(AuthenticationSchemes = "AdminScheme")]
+    public class QuyenController : Controller
     {
         private readonly DataContext _dataContext;
         private readonly INotyfService _notyfService;

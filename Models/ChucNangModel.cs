@@ -10,5 +10,6 @@ namespace WebDatMonAn.Models
         public string TenQuyen { get; set; }
 
         public string MoTa { get; set; }
+        public ICollection<ChiTietChucNang> ChiTietChucNangs { get; set; }
     }
 }

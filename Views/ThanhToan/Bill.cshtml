@@ -1,5 +1,4 @@
-﻿@model WebDatMonAn.Models.HoaDonModel
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,17 +27,25 @@
                     <div class="row">
                         <div class="col-xl-8">
                             <ul class="list-unstyled">
-                                <li class="text-muted">To: <span style="color: #5d9fc5;">@ViewBag.NewOrder.KhachHang.TenTK</span></li>
+                                <li class="text-muted">Gửi: <span style="color: #5d9fc5;">@ViewBag.NewOrder.KhachHang.TenTK</span></li>
+                                <li class="text-muted">@ViewBag.NewOrder.KhachHang.DiaChi</li>
+                                
+                                <li class="text-muted"><i class="fas fa-phone"></i> Số điện thoại : @ViewBag.NewOrder.KhachHang.SoDienThoai</li>
                             </ul>
                         </div>
                         <div class="col-xl-4">
-                            <p class="text-muted">Invoice</p>
+                            <p class="text-muted">Hóa đơn</p>
                             <ul class="list-unstyled">
                                 <li class="text-muted">
                                     <i class="fas fa-circle" style="color: #84B0CA;"></i> <span class="fw-bold">ID:</span> @ViewBag.NewOrder.MaHD
                                 </li>
                                 <li class="text-muted">
                                     <i class="fas fa-circle" style="color: #84B0CA;"></i> <span class="fw-bold">Ngày Đặt: </span> @ViewBag.NewOrder.NgayDat.ToString("dd/MM/yyyy")
+                                </li>
+                                <li class="text-muted">
+                                    <i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="me-1 fw-bold">Trạng thái:</span><span class="badge bg-warning text-black fw-bold">
+                                        Chưa thanh toán
+                                    </span>
                                 </li>
                                 <!-- Thêm các thông tin khác của đơn hàng -->
                             </ul>
@@ -47,11 +54,11 @@
 
                     <div class="row my-2 mx-1 justify-content-center">
                         <table class="table table-striped table-borderless">
-                            <thead style="background-color: #84B0CA;" class="text-white">
+                            <thead style="background-color:#84B0CA ;" class="text-white">
                                 <tr>
-                                    <th scope="col">Tên món ăn</th>
+                                    <th scope="col">Tên món</th>
                                     <th scope="col">Số lượng</th>
-                                    <th scope="col">Giá bán</th>
+                                    <th scope="col">Đơn giá</th>
                                     <th scope="col">Thành tiền</th>
                                 </tr>
                             </thead>
@@ -63,7 +70,7 @@
                                         <td>@item.MonAn.TenMonAn</td>
                                         <td>@item.soluongban</td>
                                         <td>@item.dongiaban.ToString("#,###0")</td>
-                                        <td>@item.tongtien.ToString("#,###0")</td>
+                                        <td>@(item.soluongban * item.dongiaban)</td>
                                     </tr>
                                 }
                             </tbody>
@@ -76,12 +83,23 @@
                         </div>
                         <div class="col-xl-3">
                             <ul class="list-unstyled">
-                               @*  <li class="text-muted ms-3"><span class="text-black me-4">tổng tiền</span>  @ViewBag.OrderDetails.Sum(tongtien);</li> *@
-                                @* <li class="text-muted ms-3 mt-2"><span class="text-black me-4">phí vat(15%)</span> $@((ViewBag.NewOrderr.tongtien * 0.15).tostring("c0"))</li> *@
+                                <li class="text-muted ms-3">
+                                    <span class="text-black me-4">Tổng tiền</span>
+                                    @((ViewBag.OrderDetails as List<WebDatMonAn.Models.CTHDModel>).Sum(od => od.tongtien).ToString("#,###0"))
+                                </li>
+                                <li class="text-muted ms-3 mt-2">
+                                    <span class="text-black me-4">Phí VAT (10%)</span>
+                                  @(((ViewBag.OrderDetails as List<WebDatMonAn.Models.CTHDModel>).Sum(od => od.tongtien) * 0.10).ToString("#,###0"))
+                                  
+                                </li>
                             </ul>
-                         @*    <p class="text-black float-start">
-                                <span class="text-black me-3"> tổng tiền</span><span style="font-size: 25px;">$@((ViewBag.NewOrder.tongtien * 1.15).tostring("c0"))</span>
-                            </p> *@
+                            <p class="text-black float-start">
+                                <span class="text-black me-3">Tổng tiền</span>
+                                <span style="font-size: 25px;">
+                                    @(((ViewBag.OrderDetails as List<WebDatMonAn.Models.CTHDModel>).Sum(od => od.tongtien) * 1.10).ToString("#,###0"))
+                                </span>
+                            </p>
+
                         </div>
                     </div>
 
@@ -90,9 +108,7 @@
                         <div class="col-xl-10">
                             <p>Cảm ơn quý khách đã đặt hàng của chúng tôi, chúc quý khách một ngày tốt lành.</p>
                         </div>
-                        <div class="col-xl-2">
-                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary text-capitalize" style="background-color: #60bdf3;">Pay Now</button>
-                        </div>
+                       
                     </div>
                 </div>
             </div>

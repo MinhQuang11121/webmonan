@@ -183,13 +183,13 @@
             </tbody>
         </table>
         <div class="cart-total">
-            <p><strong>tổng tiền Thanh toán:</strong></p>
-            <p class="subtotal">Tổng tiền: @Model.TongTien đ</p>
+            <p><strong>Tổng tiền Thanh toán:</strong></p>
+            <p class="subtotal">Tổng tiền: @Model.TongTien.ToString("0,##0") đ</p>
             <p>Shipping: Flat rate: $3.00<br>Shipping to Ukraine.</p>
-            <p class="total"><strong>Tổng tiền:@Model.TongTien đ</strong></p>
+            <p class="total"><strong>Tổng tiền:@Model.TongTien.ToString("#, ##0") đ</strong></p>
         @if (User.Identity.IsAuthenticated)
         {
-            <a asp-action="ThanhToan" asp-controller="ThanhToan" class="checkout-btn">Thanh toán</a>
+            <a  asp-action="ThanhToan" asp-controller="ThanhToan" class="checkout-btn text-center m-2">Đặt hàng</a>
         }
         else
         {

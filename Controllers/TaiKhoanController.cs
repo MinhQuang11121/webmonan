@@ -74,7 +74,7 @@ namespace WebDatMonAn.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                if (ModelState.IsValid) 
                 {
                     var tenExists = await _dataContext.KhachHangs.FirstOrDefaultAsync(p => p.TenTK == taikhoan.TenTk.Trim().ToLower());
 
@@ -131,7 +131,7 @@ namespace WebDatMonAn.Controllers
                         await HttpContext.SignInAsync(claimsPrincipal);
                         _notyfService.Success("Đã đăng ký thành công!");
 
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Login", "TaiKhoan");
 
                     }
                     catch
@@ -152,15 +152,16 @@ namespace WebDatMonAn.Controllers
         [HttpGet]
 
         [AllowAnonymous]
-        public IActionResult Login( string returnUrl=null)
+        public IActionResult Login(string returnUrl = null)
         {
             var taikhoanId = HttpContext.Session.GetString("MaKH");
-            if(taikhoanId != null)
+            if (taikhoanId != null)
             {
                 return RedirectToAction("Index", "Home");
             }
             return PartialView();
         }
+       
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel login, string returnUrl = null)
@@ -172,7 +173,12 @@ namespace WebDatMonAn.Controllers
                     bool isEmail = Helper.IsValidEmail(login.Email);
                     if (!isEmail) return PartialView(login);
                     var khachhang = _dataContext.KhachHangs.AsNoTracking().SingleOrDefault(x => x.Email.Trim() == login.Email);
-                    if (khachhang == null) return RedirectToAction("DangKy");
+
+                    if (khachhang == null)
+                    {
+                        _notyfService.Error("Tài khoản không tồn tại!");
+                        return PartialView(login);
+                    }
 
                     // Không sử dụng salt, chỉ dùng mật khẩu trực tiếp
                     string passs = login.MatKhau.ToMD5();
@@ -219,46 +225,126 @@ namespace WebDatMonAn.Controllers
             return View();
         }
         [HttpPost]
-		public IActionResult DoiMatKhau(DoiMatKhau model)
-		{
-			try
-			{
-				var taikhoanId = HttpContext.Session.GetString("MaKH");
-				if (taikhoanId == null)
-				{
-					return RedirectToAction("Login", "TaiKhoan");
-				}
+        public IActionResult DoiMatKhau(DoiMatKhau model)
+        {
+            try
+            {
+                var taikhoanId = HttpContext.Session.GetString("MaKH");
+                if (taikhoanId == null)
+                {
+                    return RedirectToAction("Login", "TaiKhoan");
+                }
                 if (ModelState.IsValid)
                 {
-					var taikhoan = _dataContext.KhachHangs.Find(Convert.ToInt32(taikhoanId));
-					if (taikhoan == null) return RedirectToAction("Login", "TaiKhoan");
+                    var taikhoan = _dataContext.KhachHangs.Find(Convert.ToInt32(taikhoanId));
+                    if (taikhoan == null) return RedirectToAction("Login", "TaiKhoan");
 
-					var pass = model.matkhauhientai.Trim().ToMD5();
-					if (pass == taikhoan.MatKhau)
-					{
-						string passnew = model.matkhaumoi.Trim().ToMD5();
-						taikhoan.MatKhau = passnew;
-						_dataContext.Update(taikhoan);
-						_dataContext.SaveChanges();
-						_notyfService.Success("Thay đổi mật khẩu  thành công!");
-						return RedirectToAction("Login", "TaiKhoan");
-					}
-				}
+                    var pass = model.matkhauhientai.Trim().ToMD5();
+                    if (pass == taikhoan.MatKhau)
+                    {
+                        string passnew = model.matkhaumoi.Trim().ToMD5();
+                        taikhoan.MatKhau = passnew;
+                        _dataContext.Update(taikhoan);
+                        _dataContext.SaveChanges();
+                        _notyfService.Success("Thay đổi mật khẩu  thành công!");
+                        return RedirectToAction("Login", "TaiKhoan");
+                    }
+                }
                 else
                 {
                     return View();
                 }
-			}
-			catch
-			{
+            }
+            catch
+            {
                 _notyfService.Error("Thay đổi mật khẩu không thành công!");
-				return RedirectToAction("Login", "TaiKhoan");
-			}
-			_notyfService.Error("Thay đổi mật khẩu không thành công!");
-			return View(model);
-		}
+                return RedirectToAction("Login", "TaiKhoan");
+            }
+            _notyfService.Error("Thay đổi mật khẩu không thành công!");
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult XemDonHang()
+        {
+            var taikhoanId = HttpContext.Session.GetString("MaKH");
+            if (taikhoanId != null)
+            {
+                var khachhang = _dataContext.KhachHangs.AsNoTracking().SingleOrDefault(x => x.MaKH == Convert.ToInt32(taikhoanId));
+                if (khachhang != null)
+                {
+                    var lsDonHang = _dataContext.HoaDons.AsNoTracking()
+                        .Where(x => x.MaKH == khachhang.MaKH)
+                        .OrderBy(x => x.NgayDat)
+                        .ToList();
+                    return View(lsDonHang);
+                }
+            }
+            return View(new List<HoaDonModel>());
+        }
 
-	}
+        [HttpGet]
+        public async Task<IActionResult> ChiTiet(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                var taikhoanId = HttpContext.Session.GetString("MaKH");
+                if (string.IsNullOrEmpty(taikhoanId))
+                {
+                    // Redirect to login page if "MaKH" is not found in session
+                    return RedirectToAction("Login", "TaiKhoan");
+                }
+
+                var khachhang = await _dataContext.KhachHangs
+                                        .AsNoTracking()
+                                        .FirstOrDefaultAsync(x => x.MaKH == Convert.ToInt32(taikhoanId));
+
+                if (khachhang == null)
+                {
+                    return NotFound();
+                }
+
+                var donhang = await _dataContext.HoaDons
+                                        .FirstOrDefaultAsync(m => m.MaHD == id && m.MaKH == Convert.ToInt32(taikhoanId));
+
+                if (donhang == null)
+                {
+                    return NotFound();
+                }
+
+                var chitietdonhang = await _dataContext.CTHDs
+                                     .Include(c => c.MonAn)
+                                     .Where(x => x.MaHD == id)
+                                     .OrderBy(x => x.MaCT)
+                                     .ToListAsync();
+
+
+                XemDonHang donHang = new XemDonHang();
+                donHang.HoaDon = donhang;
+                donHang.ChiTietDonHang = chitietdonhang;
+
+                return PartialView( donHang);
+            }
+            catch (Exception ex)
+            {
+                // Log exception if necessary
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
+        [HttpGet]
+        public  IActionResult QuenMatKhau()
+        {
+            return PartialView();
+        }
+
+
+
+    }
 }
 
    

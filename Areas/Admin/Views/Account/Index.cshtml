@@ -4,10 +4,10 @@
 }
 <main>
     <div class="container-fluid px-4">
-        <h3 class="mt-4">Danh Sách danh mục</h3>
+        <h3 class="mt-4">Danh sách người truy cập</h3>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a asp-action="Index" asp-controller="QuanTri">Trang quản trị</a></li>
-            <li class="breadcrumb-item active">Tables</li>
+          
         </ol>
 
         <div class="card mb-4">
@@ -15,12 +15,13 @@
             <div class="card-body">
                 <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
                     <div class="row">
-                        <div class="col ">
-                            <h3><a asp-action="Create" asp-controller="Account" class="btn btn-primary">Thêm mới Tài khoản quản trị</a></h3>
+                        <div class="col m-1 ">
+                            <h3><a asp-action="Create" asp-controller="Account" class="btn btn-primary">Phân quyền chức năng người quản trị</a></h3>
                         </div>
                         <div class="col ">
-                            <input id="keyword" name="keyword" type="text" class="form-control" style="width:25%;" placeholder="Tìm kiếm" />
+                            <h3><a asp-action="ThemNV" asp-controller="Account" class="btn btn-primary">Thêm người truy cập</a></h3>
                         </div>
+                      
                           <div class="col">
                             <select class="form-control" asp-items="ViewBag.QuyenTruyCap">
                         <option value="0" disabled selected>--Chọn Quyền--</option>
@@ -60,10 +61,7 @@
                                             <td>@item.NhanVien.DiaChi</td>
                                             <td>@item.NhanVien.DienThoai</td>
                                             <td>@item.ChucNang.TenQuyen</td>
-                                            <td>
-                                                <a class="btn btn-warning" asp-action="Edit" asp-controller="Account" asp-route-Id="@item.NhanVien.MaNV">Edit</a>
-                                                <a class="btn btn-danger" asp-action="Delete" asp-controller="Account" asp-route-Id="@item.NhanVien.MaNV">Delete</a>
-                                            </td>
+                                          
 
 
                                         </tr>

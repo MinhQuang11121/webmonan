@@ -14,6 +14,7 @@
                     <form asp-action="Edit" asp-controller="MonAn" method="post" enctype="multipart/form-data">
      
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="MaMonAn"/>
                         <div class="form-group">
                             <label class="form-label">Tên Món ăn</label>
                             <input asp-for="TenMonAn" class="form-control" />

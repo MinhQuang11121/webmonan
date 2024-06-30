@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebDatMonAn.Area.Admin.Controllers
 {
     [Area("Admin")]
-	[Authorize]
-	public class QuanTriController : Controller
+  
+    public class QuanTriController : Controller
     {
         public IActionResult Index()
         {

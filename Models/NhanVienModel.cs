@@ -10,5 +10,8 @@ namespace WebDatMonAn.Models
         public string MatKhau { get; set; }
         public string DiaChi { get; set; }
         public string DienThoai { get; set; }
+        public string Email { get; set; }
+
+        public ICollection<ChiTietChucNang> ChiTietChucNangs { get; set; }
     }
 }

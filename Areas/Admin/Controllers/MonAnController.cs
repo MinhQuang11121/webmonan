@@ -1,5 +1,6 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,8 +12,8 @@ using X.PagedList;
 namespace WebDatMonAn.Area.Admin.Controllers
 {
     [Area("Admin")]
-	[Authorize]
-	public class MonAnController : Controller
+    [Authorize(AuthenticationSchemes = "AdminScheme")]
+    public class MonAnController : Controller
     {
         private readonly DataContext _dataContext;
 		private readonly INotyfService _notyfService;
@@ -90,7 +91,7 @@ namespace WebDatMonAn.Area.Admin.Controllers
 
                 _dataContext.Add(monan);
                 await _dataContext.SaveChangesAsync();
-                TempData["success"] = "Thêm món ăn thành công";
+            _notyfService.Success("Thêm món ăn thành công!");
                 return RedirectToAction("Index");
 
           
@@ -108,36 +109,43 @@ namespace WebDatMonAn.Area.Admin.Controllers
         public async Task<IActionResult> Edit(MonAnModel monan)
         {
             ViewBag.DanhMucs = new SelectList(_dataContext.DanhMucs, "MaDanhMuc", "TenDanhMuc", monan.MaDanhMuc);
-           
-            var exists_product =  _dataContext.MonAns.Find(monan.MaMonAn);
-			var tenmonan = await _dataContext.MonAns.FirstOrDefaultAsync(p => p.TenMonAn == monan.TenMonAn);
 
-			if (exists_product != null)
+     
+            if (monan.MaMonAn == null)
             {
-               
+                _notyfService.Error("Mã món ăn không hợp lệ!");
+                return View(monan);
+            }
+
+            var exists_product = await _dataContext.MonAns.FindAsync(monan.MaMonAn);
+
+          
+            if (exists_product == null)
+            {
+                _notyfService.Error("Món ăn không tồn tại!");
                 return View(monan);
             }
 
             monan.SlugMonAn = monan.TenMonAn.Replace(" ", "-");
-        
+            var tenmonan = await _dataContext.MonAns.FirstOrDefaultAsync(p => p.TenMonAn == monan.TenMonAn && p.MaMonAn != monan.MaMonAn);
 
             if (tenmonan != null)
             {
-                ModelState.AddModelError("", "Món ăn đã có trong database");
+                _notyfService.Error("Món ăn đã tồn tại!");
                 return View(monan);
             }
 
             if (monan.ImageUpload != null)
             {
                 string uploadDir = Path.Combine(_webHostEnviorment.WebRootPath, "image/monan");
-                string imagename = Guid.NewGuid().ToString() + "_" + monan.ImageUpload.FileName;
-                string filePath = Path.Combine(uploadDir, imagename);
+                string imageName = Guid.NewGuid().ToString() + "_" + monan.ImageUpload.FileName;
+                string filePath = Path.Combine(uploadDir, imageName);
 
                 using (var fs = new FileStream(filePath, FileMode.Create))
                 {
                     await monan.ImageUpload.CopyToAsync(fs);
                 }
-                exists_product.HinhAnh = imagename;
+                exists_product.HinhAnh = imageName;
             }
 
             exists_product.TenMonAn = monan.TenMonAn;
@@ -151,9 +159,11 @@ namespace WebDatMonAn.Area.Admin.Controllers
 
             _dataContext.Update(exists_product);
             await _dataContext.SaveChangesAsync();
-            TempData["success"] = "Cập nhật món ăn thành công";
+            _notyfService.Success("Cập nhật món ăn thành công!");
             return RedirectToAction("Index");
         }
+
+
 
         public async Task<IActionResult> Delete(int Id)
         {
@@ -169,7 +179,7 @@ namespace WebDatMonAn.Area.Admin.Controllers
             }
             _dataContext.MonAns.Remove(monan);
             await _dataContext.SaveChangesAsync();
-            TempData["error"] = "Món ăn đã xóa";
+            _notyfService.Success("Xóa món ăn thành công!");
             return RedirectToAction("Index");
         }
         public async Task<IActionResult> ChiTiet(int Id)

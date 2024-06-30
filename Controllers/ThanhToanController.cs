@@ -24,7 +24,7 @@ namespace WebDatMonAn.Controllers
 		[HttpGet]
 		public IActionResult ThanhToan(string returnUrl = null)
 		{
-			var giohang = HttpContext.Session.GetJson<List<GioHangModel>>("GioHang");
+			List<GioHangModel> giohang = HttpContext.Session.GetJson<List<GioHangModel>>("GioHang") ?? new List<GioHangModel>();
 			var taikhoanId = HttpContext.Session.GetString("MaKH");
 			MuaHangVM model = new MuaHangVM();
 			if (taikhoanId != null)
@@ -45,7 +45,7 @@ namespace WebDatMonAn.Controllers
 		[HttpPost]
 		public IActionResult ThanhToan(MuaHangVM muaHang)
 		{
-			var giohang = HttpContext.Session.GetJson<List<GioHangModel>>("GioHang");
+				List<GioHangModel> giohang = HttpContext.Session.GetJson<List<GioHangModel>>("GioHang") ?? new List<GioHangModel>();
 			var taikhoanId = HttpContext.Session.GetString("MaKH");
 			MuaHangVM model = new MuaHangVM();
 			if (taikhoanId != null)
@@ -78,7 +78,7 @@ namespace WebDatMonAn.Controllers
 					hoadon.TrangThaiDonHang = 1;//đơn hàng mới
 					hoadon.CachThanhtoan = "chua thanh toan";
 					hoadon.phivanchuyen = 25000;
-					hoadon.MaNV = 1;
+					hoadon.MaNV = 3;
 					hoadon.MaShip = 1;
 					_dataContext.Add(hoadon);
 					_dataContext.SaveChanges();

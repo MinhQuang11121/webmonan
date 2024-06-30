@@ -7,10 +7,10 @@ using WebDatMonAn.Repository;
 namespace WebDatMonAn.Areas.Admin.Controllers
 {
     [Area("Admin")]
-	[Authorize]
+    [Authorize(AuthenticationSchemes = "AdminScheme")]
 
 
-	public class SearchController : Controller
+    public class SearchController : Controller
     {
         private readonly DataContext _dataContext;
         public SearchController(DataContext dataContext)

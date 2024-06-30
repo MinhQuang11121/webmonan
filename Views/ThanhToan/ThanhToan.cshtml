@@ -1,7 +1,7 @@
 ﻿@model WebDatMonAn.Models.ViewModel.MuaHangVM
 @{
 	ViewData["Title"] = "Mua hàng";
-	List<GioHangModel> giohang = ViewBag.GioHang;
+	List<GioHangModel> giohang = ViewBag.GioHang ?? new List<GioHangModel>();
 }
 <div class="section">
 	<!-- container -->

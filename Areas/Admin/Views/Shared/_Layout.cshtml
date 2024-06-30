@@ -62,7 +62,7 @@
 							</a>
 							<ul class="dropdown-menu dropdown-menu-end">
 								<li>
-									<a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span>Profile</span></a>
+									<a class="dropdown-item" asp-action="DangXuat" asp-controller="DangNhap"><i class="bx bx-user"></i><span>Đăng xuất</span></a>
 								</li>
 
 
@@ -110,6 +110,21 @@
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+								<div class="parent-icon">
+									<i class='bx bx-cart'></i>
+								</div>
+								<div class="menu-title">Quản lý hóa đơn</div>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" asp-action="Index" asp-controller="HoaDon"><i class="bx bx-right-arrow-alt"></i>Danh sách hóa đơn</a>
+								</li>
+
+
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
 							<a  class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
 								<div class="parent-icon">
 									<i class='bx bx-cart'></i>
@@ -125,6 +140,7 @@
 							</ul>
 						</li>
 
+
 						<li class="nav-item dropdown">
 							<a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
 								<div class="parent-icon">
@@ -137,7 +153,10 @@
 									<a asp-action="Index" asp-controller="Quyen" class="dropdown-item" ><i class="bx bx-right-arrow-alt"></i>Quản lý Quyền truy cập</a>
 								</li>
 								<li>
-									<a class="dropdown-item" asp-action="Index" asp-controller="Shipper"><i class="bx bx-right-arrow-alt"></i>Quản lý shipper</a>
+									<a asp-action="Index" asp-controller="Account" class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Quản lý người  truy cập</a>
+								</li>
+								<li>
+									<a class="dropdown-item" asp-action="Index" asp-controller="Shipper"><i class="bx bx-right-arrow-alt"></i>Quản lý người giao hàng</a>
 								</li>
 								<li>
 									<a class="dropdown-item" asp-action="Index" asp-controller="DiaDiem"><i class="bx bx-right-arrow-alt"></i>Quản lý tỉnh thành</a>

@@ -19,19 +19,20 @@
                 <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
                  
                        <div class="row">
-                           <div class="col ">
-                                <h3><a asp-action="Create" asp-controller="MonAn" class="btn btn-primary">Thêm mới món ăn</a></h3>
-                           </div>
+                          <div class="col">
+                               <h3><a asp-action="Create" asp-controller="MonAn" class="btn btn-primary">Thêm mới món ăn</a></h3>
+                          </div>
                            <div class="col ">
                                <input id="keyword" name="keyword" type="text" class="form-control" style="width:35%;" placeholder="Tìm kiếm" />
                            </div>
                            <div class="col">
-                              <select class="form-control" id="txtCateID" name="txtCateID" asp-items="ViewBag.DanhMuc">
+                               <select class="form-control" id="txtCateID" name="txtCateID" asp-items="ViewBag.DanhMuc">
                         <option value="0" selected>--Chọn Danh Mục--</option>
                         <option value="all"> Chọn tất cả </option>
 
                         </select>
                            </div>
+                          
 
                        </div>
                   
@@ -80,7 +81,8 @@
                                         <td class="text-center align-middle">
                                             <a class="btn btn-warning " asp-action="ChiTiet" asp-controller="MonAn" asp-route-Id="@item.MaMonAn">Xem chi tiết</a>
                                             <a class="btn btn-warning" asp-action="Edit" asp-controller="MonAn" asp-route-Id="@item.MaMonAn" >Edit</a>
-                                            <a class="btn btn-danger" asp-action="Delete" asp-controller="MonAn" asp-route-Id="@item.MaMonAn" >Delete</a>
+                                            <a class="btn btn-danger" asp-action="Delete" asp-controller="MonAn" asp-route-Id="@item.MaMonAn" >Xóa</a>
+                                            
                                         </td>
                                     </tr>
                                 }

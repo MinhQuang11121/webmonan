@@ -160,7 +160,6 @@ namespace WebDatMonAn.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaDD"));
 
                     b.Property<string>("DiaChiCuThe")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TenPhuongXa")
@@ -215,6 +214,9 @@ namespace WebDatMonAn.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TrangThaiDonHang")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TrangThaiGiaoHang")
                         .HasColumnType("int");
 
                     b.Property<string>("ghichu")
@@ -356,6 +358,10 @@ namespace WebDatMonAn.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("MatKhau")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -420,13 +426,13 @@ namespace WebDatMonAn.Migrations
             modelBuilder.Entity("WebDatMonAn.Models.ChiTietChucNang", b =>
                 {
                     b.HasOne("WebDatMonAn.Models.ChucNangModel", "ChucNang")
-                        .WithMany()
+                        .WithMany("ChiTietChucNangs")
                         .HasForeignKey("MaCN")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WebDatMonAn.Models.NhanVienModel", "NhanVien")
-                        .WithMany()
+                        .WithMany("ChiTietChucNangs")
                         .HasForeignKey("MaNV")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -494,6 +500,16 @@ namespace WebDatMonAn.Migrations
                         .IsRequired();
 
                     b.Navigation("DanhMuc");
+                });
+
+            modelBuilder.Entity("WebDatMonAn.Models.ChucNangModel", b =>
+                {
+                    b.Navigation("ChiTietChucNangs");
+                });
+
+            modelBuilder.Entity("WebDatMonAn.Models.NhanVienModel", b =>
+                {
+                    b.Navigation("ChiTietChucNangs");
                 });
 #pragma warning restore 612, 618
         }

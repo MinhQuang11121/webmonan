@@ -6,9 +6,11 @@ namespace WebDatMonAn.Models
     {
         [Key]
         public int MaDD { get; set; }
+
+        [Required(ErrorMessage = "Yêu cầu nhập tên tỉnh thành ")]
         public string TenTinhThanh { get; set; }
         public string TenQuanHuyen { get; set; }
         public string TenPhuongXa { get; set; }
-        public string DiaChiCuThe { get; set; }
+        public string? DiaChiCuThe { get; set; }
     }
 }

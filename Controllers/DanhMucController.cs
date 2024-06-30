@@ -5,6 +5,7 @@ using WebDatMonAn.Repository;
 
 namespace WebDatMonAn.Controllers
 {
+
     public class DanhMucController : Controller
     {
         private readonly DataContext _dataContext;

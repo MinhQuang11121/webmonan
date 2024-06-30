@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebDatMonAn.Migrations
 {
     /// <inheritdoc />
-    public partial class taolaimodel : Migration
+    public partial class themtruonghang : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,7 +36,7 @@ namespace WebDatMonAn.Migrations
                     TenTinhThanh = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TenQuanHuyen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TenPhuongXa = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DiaChiCuThe = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    DiaChiCuThe = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,7 +52,8 @@ namespace WebDatMonAn.Migrations
                     TenNV = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MatKhau = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DienThoai = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    DienThoai = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -126,12 +127,12 @@ namespace WebDatMonAn.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenTK = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MatKhau = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NgaySinh = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SoDienThoai = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hinh = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Hinh = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TrangThai = table.Column<int>(type: "int", nullable: false),
                     MaDD = table.Column<int>(type: "int", nullable: false)
                 },
@@ -182,11 +183,12 @@ namespace WebDatMonAn.Migrations
                     NgayDat = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DiaChi = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CachThanhtoan = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    loaivanchuyen = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    phivanchuyen = table.Column<double>(type: "float", nullable: false),
-                    ghichu = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    loaivanchuyen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    phivanchuyen = table.Column<double>(type: "float", nullable: true),
+                    ghichu = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TrangThaiDonHang = table.Column<int>(type: "int", nullable: false),
-                    Toado = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TrangThaiGiaoHang = table.Column<int>(type: "int", nullable: true),
+                    Toado = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MaKH = table.Column<int>(type: "int", nullable: false),
                     MaShip = table.Column<int>(type: "int", nullable: false),
                     MaNV = table.Column<int>(type: "int", nullable: false)
