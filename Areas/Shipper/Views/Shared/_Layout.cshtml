@@ -58,6 +58,9 @@
   </div>
     </header>
    @RenderBody()
+    @await Component.InvokeAsync("Notyf")
+
+    @await RenderSectionAsync("Scripts", required: false)
 </nav>
 </body>
 </html>

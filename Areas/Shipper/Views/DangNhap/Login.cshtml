@@ -110,6 +110,16 @@
             </a>
         </p>
     </div>
+
+
+
+    <script src="~/login/vendor/jquery/jquery.min.js"></script>
+    <script src="~/login/js/main.js"></script>
+    @await Component.InvokeAsync("Notyf")
+
+    @section Scripts {
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
   
 </body>
 </html>
