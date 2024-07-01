@@ -38,7 +38,7 @@ namespace WebDatMonAn.Areas.Shipper.Controllers
             var hoaDon = _dataContext.HoaDons.FirstOrDefault(h => h.MaHD == maHD);
             if (hoaDon != null)
             {
-                hoaDon.TrangThaiDonHang = 1; 
+                hoaDon.TrangThaiGiaoHang = 1; 
                 _dataContext.SaveChanges();
                
             }

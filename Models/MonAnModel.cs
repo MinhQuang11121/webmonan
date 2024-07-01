@@ -20,6 +20,7 @@ namespace WebDatMonAn.Models
 
         public int TrangThai { get; set; }
         public int SoLuong { get; set; }
+
         public string DiaChiQuan { get; set; }
 
         [Required(ErrorMessage = "Yêu cầu nhập giá món ăn")]

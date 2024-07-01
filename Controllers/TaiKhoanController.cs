@@ -5,11 +5,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using WebDatMonAn.Models;
 using WebDatMonAn.Models.ViewModel;
 using WebDatMonAn.Repository;
 using WebDatMonAn.Repository.Extension;
+using WebDatMonAn.Repository.Services;
 
 namespace WebDatMonAn.Controllers
 {
@@ -17,11 +20,15 @@ namespace WebDatMonAn.Controllers
     {
         private readonly DataContext _dataContext;
         private readonly INotyfService _notyfService;
-        public TaiKhoanController(DataContext dataContext, INotyfService notyfService)
+        private readonly EmailServices _emailService;
+
+       
+        public TaiKhoanController(DataContext dataContext, INotyfService notyfService, EmailServices emailService)
 
         {
             _notyfService = notyfService;
             _dataContext = dataContext;
+            _emailService = emailService;
         }
         [HttpGet]
         [AllowAnonymous]
@@ -74,7 +81,7 @@ namespace WebDatMonAn.Controllers
         {
             try
             {
-                if (ModelState.IsValid) 
+                if (ModelState.IsValid)
                 {
                     var tenExists = await _dataContext.KhachHangs.FirstOrDefaultAsync(p => p.TenTK == taikhoan.TenTk.Trim().ToLower());
 
@@ -161,7 +168,7 @@ namespace WebDatMonAn.Controllers
             }
             return PartialView();
         }
-       
+
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel login, string returnUrl = null)
@@ -327,7 +334,7 @@ namespace WebDatMonAn.Controllers
                 donHang.HoaDon = donhang;
                 donHang.ChiTietDonHang = chitietdonhang;
 
-                return PartialView( donHang);
+                return PartialView(donHang);
             }
             catch (Exception ex)
             {
@@ -337,15 +344,71 @@ namespace WebDatMonAn.Controllers
         }
 
         [HttpGet]
-        public  IActionResult QuenMatKhau()
+        public IActionResult QuenMatKhau()
         {
             return PartialView();
         }
+        [HttpPost]
+        public async Task<IActionResult> QuenMatKhau(QuenMatKhauViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _dataContext.KhachHangs.SingleOrDefaultAsync(u => u.Email == model.Email);
+                if (user == null)
+                {
+                    _notyfService.Error("Email của bạn không tồn tại");
+                    return PartialView();
+                }
 
+                user.ResetToken = Guid.NewGuid().ToString();
+                user.ResetTokenExpiry = DateTime.Now.AddHours(1);
+                await _dataContext.SaveChangesAsync();
 
+                var callbackUrl = Url.Action("ResetMatKhau", "TaiKhoan", new { token = user.ResetToken }, protocol: Request.Scheme);
+                var message = $"Vui lòng đặt lại mật khẩu của bạn bằng cách <a href='{callbackUrl}'>nhấp vào đây</a>";
 
+                await _emailService.SendEmailAsync(model.Email, "Đặt lại mật khẩu", message);
+
+             
+               
+                return PartialView("XacThuc");
+            }
+
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult ResetMatKhau(string token)
+        {
+            var model = new ResetMatKhauViewModel { Token = token };
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetMatKhau(ResetMatKhauViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _dataContext.KhachHangs.SingleOrDefaultAsync(u => u.ResetToken == model.Token && u.ResetTokenExpiry > DateTime.Now);
+                if (user == null)
+                {
+                    _notyfService.Error("Token của bạn đã hết hạn!");
+                    return View(model);
+                }
+
+                user.MatKhau = model.MatKhauMoi.Trim().ToMD5();
+                user.ResetToken = null;
+                user.ResetTokenExpiry = null;
+                await _dataContext.SaveChangesAsync();
+
+                _notyfService.Success("Mật khẩu của bạn đã đặt thành công!");
+                return PartialView("ResetMatKhau");
+            }
+
+            return PartialView(model);
+        }
     }
 }
+
 
    
 

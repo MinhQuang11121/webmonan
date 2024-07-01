@@ -1,7 +1,9 @@
 ﻿using AspNetCoreHero.ToastNotification;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using WebDatMonAn.Models.Settings;
 using WebDatMonAn.Repository;
+using WebDatMonAn.Repository.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,8 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromDays(30);
     options.Cookie.IsEssential = true;
 });
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddTransient<EmailServices>();
 
 // Configure ToastNotification
 builder.Services.AddNotyf(config =>

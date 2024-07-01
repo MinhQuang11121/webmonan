@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using WebDatMonAn.Models;
 using WebDatMonAn.Repository;
+using X.PagedList;
 
 namespace WebDatMonAn.Controllers
 {
@@ -47,15 +48,27 @@ namespace WebDatMonAn.Controllers
 			_notyfService.Success("truy cập  thành công!");
 			return View(monan);
         }
-        public IActionResult Tatcamonan()
-        {
-            var monan = _dataContext.MonAns.Include(c => c.DanhMuc).AsNoTracking().OrderBy(x => x.NgayTao).Where(d => d.TrangThai == 1).ToList();
-            return View("Tatcamonan",monan);
 
-           
-        }
-       
-        public IActionResult Privacy()
+		public IActionResult Tatcamonan(int? page)
+		{
+			var pageNumber = page ?? 1; // Default to the first page if page is null
+			var pageSize = 6;
+
+			var monan = _dataContext.MonAns
+				.Include(c => c.DanhMuc)
+				.AsNoTracking()
+				.OrderBy(x => x.NgayTao)
+				.Where(d => d.TrangThai == 1)
+				.ToList();
+
+			
+			var pagedMonan = new PagedList<MonAnModel>(monan, pageNumber, pageSize);
+
+			ViewBag.CurrentPage = pageNumber;
+			return View("Tatcamonan",pagedMonan); 
+		}
+
+		public IActionResult Privacy()
         {
             return View();
         }

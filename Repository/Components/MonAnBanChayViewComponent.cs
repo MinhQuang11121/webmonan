@@ -13,7 +13,7 @@ namespace WebDatMonAn.Repository.Components
 		}
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			var monan = await _dataContext.MonAns.Include(c => c.DanhMuc).OrderByDescending(x => x.NgayTao).Skip(1).Take(3).ToListAsync();
+			var monan = await _dataContext.MonAns.Include(c => c.DanhMuc).OrderByDescending(x => x.NgayTao).Skip(4).Take(6).ToListAsync();
 			return View(monan);
 		}
 	}

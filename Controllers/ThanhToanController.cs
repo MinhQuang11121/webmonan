@@ -76,7 +76,8 @@ namespace WebDatMonAn.Controllers
 					hoadon.NgayGiao = DateTime.Now;
 					hoadon.NgayDat = DateTime.Now;
 					hoadon.TrangThaiDonHang = 1;//đơn hàng mới
-					hoadon.CachThanhtoan = "chua thanh toan";
+					hoadon.TrangThaiGiaoHang = 0;//đơn hàng mới
+                    hoadon.CachThanhtoan = "chua thanh toan";
 					hoadon.phivanchuyen = 25000;
 					hoadon.MaNV = 3;
 					hoadon.MaShip = 1;

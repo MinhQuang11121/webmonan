@@ -10,11 +10,11 @@ namespace WebDatMonAn.Repository
             {
                 var extension = Path.GetExtension(file.FileName).ToLower(); // Chuyển đổi phần mở rộng thành chữ thường
 
-                string[] extensions = { "jpg", "png", "jpeg" };
+                string[] extensions = { "jpg", "png", "jpeg","webp" };
                 bool result = extensions.Any(x => extension.EndsWith(x));
                 if (!result)
                 {
-                    return new ValidationResult("Allowed extensions are jpg, png, or jpeg");
+                    return new ValidationResult("Allowed extensions are jpg, png,webp, or jpeg");
                 }
             }
             return ValidationResult.Success;

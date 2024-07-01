@@ -13,6 +13,8 @@ namespace WebDatMonAn.Models
 
         public string MatKhau { get; set; }
         public string Email { get; set; }
+        public string? ResetToken { get; set; }
+        public DateTime? ResetTokenExpiry { get; set; }
 
 
     }

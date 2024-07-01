@@ -12,6 +12,10 @@ namespace WebDatMonAn.Models
         public string DienThoai { get; set; }
         public string Email { get; set; }
 
+
+        public string? ResetToken { get; set; }
+        public DateTime? ResetTokenExpiry { get; set; }
+
         public ICollection<ChiTietChucNang> ChiTietChucNangs { get; set; }
     }
 }

@@ -5,6 +5,8 @@ using WebDatMonAn.Models.ViewModel;
 using WebDatMonAn.Repository.Extension;
 using WebDatMonAn.Repository;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.EntityFrameworkCore;
+using WebDatMonAn.Repository.Services;
 
 namespace WebDatMonAn.Areas.Shipper.Controllers
 {
@@ -13,11 +15,13 @@ namespace WebDatMonAn.Areas.Shipper.Controllers
     {
         private readonly DataContext _dataContext;
         private readonly INotyfService _notyfService;
-        public DangNhapController(DataContext dataContext, INotyfService notyfService)
+        private readonly EmailServices _emailService;
+        public DangNhapController(DataContext dataContext, INotyfService notyfService, EmailServices emailServices)
 
         {
             _notyfService = notyfService;
             _dataContext = dataContext;
+            _emailService = emailServices;
         }
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
@@ -48,7 +52,6 @@ namespace WebDatMonAn.Areas.Shipper.Controllers
                         return PartialView(login);
                     }
 
-                    // Assuming MatKhau is stored as a hash in the database
                     string hashedPassword = login.MatKhau.ToMD5();
                     if (shipper.MatKhau != hashedPassword)
                     {
@@ -56,15 +59,13 @@ namespace WebDatMonAn.Areas.Shipper.Controllers
                         return PartialView(login);
                     }
 
-                    // Set session if needed
                     HttpContext.Session.SetString("MaShip", shipper.MaShip.ToString());
 
-                    // Set claims and sign in
                     var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, shipper.Email), // Consider using email or username here
+                new Claim(ClaimTypes.Name, shipper.Email), 
                 new Claim("MaShip", shipper.MaShip.ToString()),
-                new Claim(ClaimTypes.Role, "Shipper") // Use correct role here
+                new Claim(ClaimTypes.Role, "Shipper") 
             };
 
                     var claimsIdentity = new ClaimsIdentity(claims, "ShipperScheme");
@@ -101,6 +102,69 @@ namespace WebDatMonAn.Areas.Shipper.Controllers
             HttpContext.Session.Remove("MaShip");
             _notyfService.Error("Bạn đã đăng xuất");
             return RedirectToAction("Login", "DangNhap");
+        }
+        [HttpGet]
+        public IActionResult QuenMatKhau()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public async Task<IActionResult> QuenMatKhau(QuenMatKhauViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _dataContext.Shippers.SingleOrDefaultAsync(u => u.Email == model.Email);
+                if (user == null)
+                {
+                    _notyfService.Error("Email của bạn không tồn tại");
+                    return PartialView();
+                }
+
+                user.ResetToken = Guid.NewGuid().ToString();
+                user.ResetTokenExpiry = DateTime.Now.AddHours(1);
+                await _dataContext.SaveChangesAsync();
+
+                var callbackUrl = Url.Action("ResetMatKhau", "TaiKhoan", new { token = user.ResetToken }, protocol: Request.Scheme);
+                var message = $"Vui lòng đặt lại mật khẩu của bạn bằng cách <a href='{callbackUrl}'>nhấp vào đây</a>";
+
+                await _emailService.SendEmailAsync(model.Email, "Đặt lại mật khẩu", message);
+
+
+
+                return PartialView("XacThuc");
+            }
+
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult ResetMatKhau(string token)
+        {
+            var model = new ResetMatKhauViewModel { Token = token };
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetMatKhau(ResetMatKhauViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _dataContext.Shippers.SingleOrDefaultAsync(u => u.ResetToken == model.Token && u.ResetTokenExpiry > DateTime.Now);
+                if (user == null)
+                {
+                    _notyfService.Error("Token của bạn đã hết hạn!");
+                    return View(model);
+                }
+
+                user.MatKhau = model.MatKhauMoi.Trim().ToMD5();
+                user.ResetToken = null;
+                user.ResetTokenExpiry = null;
+                await _dataContext.SaveChangesAsync();
+
+                _notyfService.Success("Mật khẩu của bạn đã đặt thành công!");
+                return PartialView("ResetMatKhau");
+            }
+
+            return PartialView(model);
         }
 
     }

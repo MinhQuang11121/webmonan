@@ -20,6 +20,8 @@ namespace WebDatMonAn.Models
         public int MaDD { get; set; }
         [ForeignKey("MaDD")]
         public DiaDiemModel DiaDiem { get; set; }
+        public string? ResetToken { get; set; }
+        public DateTime? ResetTokenExpiry { get; set; }
 
     }
 }

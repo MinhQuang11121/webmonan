@@ -31,7 +31,7 @@ namespace WebDatMonAn.Area.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            _notyfService.Success("Thêm mới danh mục!");
+           
             return View();
         }
 
@@ -77,7 +77,7 @@ namespace WebDatMonAn.Area.Admin.Controllers
             }
             if (exists_category == null)
             {
-                return NotFound(); // Return 404 if not found
+                return NotFound(); 
             }
             exists_category.TenDanhMuc = danhmuc.TenDanhMuc;
             exists_category.MoTa = danhmuc.MoTa;
@@ -95,7 +95,7 @@ namespace WebDatMonAn.Area.Admin.Controllers
             var danhMuc = await _dataContext.DanhMucs.FindAsync(Id);
             if (danhMuc == null)
             {
-                return NotFound(); // Return 404 if not found
+                return NotFound(); 
             }
             _dataContext.DanhMucs.Remove(danhMuc);
             await _dataContext.SaveChangesAsync();

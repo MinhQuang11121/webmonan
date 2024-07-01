@@ -14,6 +14,7 @@ namespace WebDatMonAn.Repository.Components
         {
             var danhMucs = await _dataContext.DanhMucs.Take(3).ToListAsync();
             
+            
             return View(danhMucs);
         }
     }
