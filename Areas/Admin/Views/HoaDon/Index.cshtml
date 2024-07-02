@@ -24,6 +24,7 @@
                                     <th class="text-center" data-sortable="true">Đơn hàng</th>
                                     <th class="text-center" data-sortable="true">Ngày Mua</th>
                                     <th class="text-center" data-sortable="true">Trạng thái</th>
+                                    <th class="text-center" data-sortable="true">Trạng thái giao hàng</th>
                                     <th class="text-center" data-sortable="true">Manager</th>
                                 </tr>
                             </thead>
@@ -44,6 +45,18 @@
                                         {
                                             <td class="text-center align-middle">
                                                 <button class="btn btn-warning disabled">Đã thanh toán</button>
+                                            </td>
+                                        }
+                                        @if (item.TrangThaiGiaoHang == 1)
+                                        {
+                                            <td class="text-center align-middle">
+                                                <p><b class="text-warning">Đã giao</b></p>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-center align-middle">
+                                                <p><b class="text-primary">Chưa giao</b></p>
                                             </td>
                                         }
                                         <td class="text-center align-middle">

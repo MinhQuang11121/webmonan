@@ -6,11 +6,16 @@ namespace WebDatMonAn.Models
     {
         [Key]
         public int MaNV { get; set; }
-        public string TenNV { get; set; }
-        public string MatKhau { get; set; }
-        public string DiaChi { get; set; }
-        public string DienThoai { get; set; }
-        public string Email { get; set; }
+		[Required(ErrorMessage = "Yêu cầu nhập tên nhân viên")]
+		public string TenNV { get; set; }
+		[Required(ErrorMessage = "Yêu cầu nhập mật khẩu truy cập")]
+		public string MatKhau { get; set; }
+		[Required(ErrorMessage = "Yêu cầu nhập địa chỉ nhân  viên")]
+		public string DiaChi { get; set; }
+		[Required(ErrorMessage = "Yêu cầu nhập điện thoại")]
+		public string DienThoai { get; set; }
+		[Required(ErrorMessage = "Yêu cầu nhập email!")]
+		public string Email { get; set; }
 
 
         public string? ResetToken { get; set; }

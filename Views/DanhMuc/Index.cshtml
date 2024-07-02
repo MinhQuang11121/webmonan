@@ -37,7 +37,7 @@
                 <!-- /store products -->
 
                 <div class="pagination-container">
-                    @Html.PagedListPager(Model, page => Url.Action("Tatcamonan", new { page }))
+                    @Html.PagedListPager(Model, page => Url.Action("Tatcamonan","Home", new { page }))
                 </div>
 
                 <style>

@@ -78,7 +78,7 @@ namespace WebDatMonAn.Controllers
 					hoadon.TrangThaiDonHang = 1;//đơn hàng mới
 					hoadon.TrangThaiGiaoHang = 0;//đơn hàng mới
                     hoadon.CachThanhtoan = "chua thanh toan";
-					hoadon.phivanchuyen = 25000;
+					hoadon.phivanchuyen = 15000;
 					hoadon.MaNV = 3;
 					hoadon.MaShip = 1;
 					_dataContext.Add(hoadon);

@@ -85,22 +85,22 @@
                             <ul class="list-unstyled">
                                 <li class="text-muted ms-3">
                                     <span class="text-black me-4">Tổng tiền</span>
-                                    @((ViewBag.OrderDetails as List<WebDatMonAn.Models.CTHDModel>).Sum(od => od.tongtien).ToString("#,###0"))
+                                    @(((ViewBag.OrderDetails as List<WebDatMonAn.Models.CTHDModel>).Sum(od => od.tongtien) + 15000).ToString("#,###0") )đ
                                 </li>
                                 <li class="text-muted ms-3 mt-2">
                                     <span class="text-black me-4">Phí VAT (10%)</span>
-                                  @(((ViewBag.OrderDetails as List<WebDatMonAn.Models.CTHDModel>).Sum(od => od.tongtien) * 0.10).ToString("#,###0"))
-                                  
+                                    @((((ViewBag.OrderDetails as List<WebDatMonAn.Models.CTHDModel>).Sum(od => od.tongtien) + 15000) * 0.10).ToString("#,###0") )đ
                                 </li>
                             </ul>
                             <p class="text-black float-start">
                                 <span class="text-black me-3">Tổng tiền</span>
                                 <span style="font-size: 25px;">
-                                    @(((ViewBag.OrderDetails as List<WebDatMonAn.Models.CTHDModel>).Sum(od => od.tongtien) * 1.10).ToString("#,###0"))
+                                    @((((ViewBag.OrderDetails as List<WebDatMonAn.Models.CTHDModel>).Sum(od => od.tongtien) + 15000) * 1.10).ToString("#,###0") ) đ
                                 </span>
                             </p>
-
                         </div>
+
+
                     </div>
 
                     <hr>

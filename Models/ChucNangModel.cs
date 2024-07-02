@@ -6,10 +6,10 @@ namespace WebDatMonAn.Models
     {
         [Key]
         public int MaCN { get; set; }
-
-        public string TenQuyen { get; set; }
-
-        public string MoTa { get; set; }
+		[Required(ErrorMessage = "Yêu cầu nhập tên chức năng")]
+		public string TenQuyen { get; set; }
+		[Required(ErrorMessage = "Yêu cầu nhập nội dung  ")]
+		public string MoTa { get; set; }
         public ICollection<ChiTietChucNang> ChiTietChucNangs { get; set; }
     }
 }
