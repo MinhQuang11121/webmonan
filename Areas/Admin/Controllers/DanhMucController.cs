@@ -88,8 +88,7 @@ namespace WebDatMonAn.Area.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Delete(int Id)
         {
             var danhMuc = await _dataContext.DanhMucs.FindAsync(Id);

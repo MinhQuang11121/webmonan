@@ -10,7 +10,7 @@
                     <h3>Thêm mới Danh mục</h3>
                 </div>
                 <div class="card-body">
-                    <form asp-action="Edit" asp-controller="DanhMuc" method="post">
+                    <form asp-action="Create" asp-controller="DanhMuc" method="post">
                         <input type="hidden" asp-for="MaDanhMuc" />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
