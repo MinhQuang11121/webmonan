@@ -58,8 +58,7 @@ namespace WebDatMonAn.Controllers
 				model.SoDienThoai = khachhang.SoDienThoai;
 
 				khachhang.MaDD = Convert.ToInt32(muaHang.TenTinhThanh);
-				//khachhang.MaDD = Convert.ToInt32(muaHang.TenQuanHuyen);
-				//khachhang.MaDD = Convert.ToInt32(muaHang.TenPhuongXa);
+				
 
 				khachhang.DiaChi = muaHang.DiaChi;
 				_dataContext.Update(khachhang);
